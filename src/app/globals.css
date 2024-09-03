@@ -31,3 +31,20 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer base {
+  @font-face {
+    font-family: 'sf-light';
+    src: url("../../public/fonts/SFUIText-Light.otf") format('opentype');
+  }
+
+  @font-face {
+    font-family: 'sf-medium';
+    src: url("../../public/fonts/SFUIText-Medium.otf") format('opentype');
+  }
+
+  @font-face {
+    font-family: 'sf-bold';
+    src: url("../../public/fonts/SFUIText-Bold.otf") format('opentype');
+  }
+}

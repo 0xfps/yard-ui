@@ -9,26 +9,22 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+      backgroundImage: {},
     },
     fontFamily: {
-      "mini": ["sf-light"],
-      "body": ["sf-medium"],
-      "max": ["sf-bold"]
+      "sf-light": ["sf-light"],
+      "sf-medium": ["sf-medium", ...defaultTheme.fontFamily.sans],
+      "sf-bold": ["sf-bold"]
     },
     colors: {
       "background": "#10191F",
       "button": "#0391FF",
       "button-light": "#5BB7FF",
-      "dark": "#242525",
-      "dark-light": "#585F65",
+      "night": "#242525",
+      "night-light": "#585F65",
       "text": "#FFFFFF"
     }
   },
-  plugins: [],
+  plugins: []
 };
 export default config;

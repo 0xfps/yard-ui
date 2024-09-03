@@ -1,5 +1,6 @@
 "use client"
 
+import NavBarHome from "@/components/navbar";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -9,8 +10,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-background min-h-screen bg-hero">
-        
+      <div className="bg-background min-h-screen bg-hero bg-center">
+        <NavBarHome/>
       </div>
     </>
   );

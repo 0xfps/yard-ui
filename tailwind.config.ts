@@ -24,7 +24,8 @@ const config: Config = {
       "button-light": "#5BB7FF",
       "night": "#242525",
       "night-light": "#585F65",
-      "text": "#FFFFFF"
+      "text": "#FFFFFF",
+      "transparent": "transparent"
     }
   },
   plugins: []

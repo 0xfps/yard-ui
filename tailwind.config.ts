@@ -9,7 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {},
+      backgroundImage: {
+        'hero': "url('/images/background.svg')"
+      }
     },
     fontFamily: {
       "sf-light": ["sf-light"],

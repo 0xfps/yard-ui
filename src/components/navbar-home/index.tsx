@@ -1,21 +1,15 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import GradientButton from "../gradient-button"
 
 export default function NavBarHome() {
-    const router = useRouter()
-    
-    function launch() {
-        router.push("/swap")
-    }
-
     return (
-        <div className="h-[80px]">
+        <div className="h-[80px] sticky top-0">
             <div className="w-[85%] h-full m-auto flex p-[10px]">
                 {/* Yard logo. */}
                 <div className="w-[10%] h-full flex flex-row justify-center items-center">
                     <a href="/" className="hover:brightness-[.85]">
-                        <img src="/images/yard.png" alt="Yard Logo" className="w-[50px] h-[50px]" />
+                        <img src="/images/yard.png" alt="Yard Logo" className="w-[50px] h-[50px]"/>
                     </a>
                 </div>
                 {/* Yard navigation. */}
@@ -30,12 +24,13 @@ export default function NavBarHome() {
                 </div>
                 {/* Yard launch button.*/}
                 <div className="w-[20%] h-full flex flex-row justify-center items-center">
-                    <button
-                        className="bg-button w-[160px] h-[48px] text-text rounded-[12px] text-lg font-sf-light hover:opacity-[.90]"
-                        onClick={launch}
-                    >
-                        Launch App
-                    </button>
+                    <a href="/swap" target="_blank">
+                        <GradientButton>
+                            <div className="bg-button w-[160px] h-[48px] text-text rounded-[12px] text-lg font-sf-light hover:opacity-[.90] flex flex-row justify-center items-center">
+                                Launch App
+                            </div>
+                        </GradientButton>
+                    </a>
                 </div>
             </div>
         </div>

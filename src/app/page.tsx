@@ -1,6 +1,9 @@
 "use client"
 
-import NavBarHome from "@/components/navbar";
+import Hero from "@/components/hero";
+import HeroData from "@/components/hero-data";
+import HeroImage from "@/components/hero-image";
+import NavBarHome from "@/components/navbar-home";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -10,8 +13,11 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-background min-h-screen bg-hero bg-center">
-        <NavBarHome/>
+      <div className="bg-background min-h-screen bg-hero bg-top bg-no-repeat">
+        <NavBarHome />
+        <Hero />
+        <HeroImage />
+        <HeroData/>
       </div>
     </>
   );

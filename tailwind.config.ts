@@ -9,7 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {},
+      backgroundImage: {
+        "hero": "url('/images/background.svg')",
+        "feature1": "url('/images/nft-swap.svg')",
+        "feature2": "url('/images/nft-imgs.svg')"
+      }
     },
     fontFamily: {
       "sf-light": ["sf-light"],
@@ -22,7 +26,10 @@ const config: Config = {
       "button-light": "#5BB7FF",
       "night": "#242525",
       "night-light": "#585F65",
-      "text": "#FFFFFF"
+      "text": "#FFFFFF",
+      "transparent": "transparent",
+      "div-grad-start": "#0099FF",
+      "div-grad-end": "#F8FBFD"
     }
   },
   plugins: []

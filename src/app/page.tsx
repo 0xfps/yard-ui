@@ -1,5 +1,6 @@
 "use client"
 
+import Chains from "@/components/chains";
 import Hero from "@/components/hero";
 import HeroData from "@/components/hero-data";
 import HeroImage from "@/components/hero-image";
@@ -17,7 +18,8 @@ export default function Home() {
         <NavBarHome />
         <Hero />
         <HeroImage />
-        <HeroData/>
+        <HeroData />
+        <Chains/>
       </div>
     </>
   );

@@ -3,7 +3,7 @@
 import { Divider, Image } from "@nextui-org/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { FaGithub } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaBehance, FaXTwitter } from "react-icons/fa6";
 
 export default function AboutHero() {
     return (
@@ -123,7 +123,8 @@ export default function AboutHero() {
                     </CardBody>
                     <Divider />
                     <CardFooter>
-                        <div className="w-[20%] mt-4 flex flex-row justify-start items-center text-text text-[20px]">
+                        <div className="w-[20%] mt-4 flex flex-row justify-around items-center text-text text-[20px]">
+                            <a href="https://www.behance.net/helenobika" target="_blank" className="hover:opacity-80"><FaBehance /></a>
                             <a href="https://x.com/BilionaireRaven" target="_blank" className="hover:opacity-80"><FaXTwitter /></a>
                         </div>
                     </CardFooter>

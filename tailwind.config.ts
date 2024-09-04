@@ -10,7 +10,9 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'hero': "url('/images/background.svg')"
+        "hero": "url('/images/background.svg')",
+        "feature1": "url('/images/nft-swap.svg')",
+        "feature2": "url('/images/nft-imgs.svg')"
       }
     },
     fontFamily: {
@@ -25,7 +27,9 @@ const config: Config = {
       "night": "#242525",
       "night-light": "#585F65",
       "text": "#FFFFFF",
-      "transparent": "transparent"
+      "transparent": "transparent",
+      "div-grad-start": "#0099FF",
+      "div-grad-end": "#F8FBFD"
     }
   },
   plugins: []

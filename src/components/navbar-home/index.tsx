@@ -27,7 +27,7 @@ export default function NavBarHome() {
                     <a href="/swap" target="_blank">
                         <GradientButton>
                             <div className="bg-button w-[160px] h-[48px] text-text rounded-[12px] text-lg font-sf-light hover:opacity-[.90] flex flex-row justify-center items-center">
-                                Launch App
+                                Launch
                             </div>
                         </GradientButton>
                     </a>

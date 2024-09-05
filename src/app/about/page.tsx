@@ -6,9 +6,9 @@ import Links from "@/components/links";
 import NavBarHome from "@/components/navbar-home";
 import { useEffect } from "react";
 
-export default function Home() {
+export default function About() {
     useEffect(function () {
-        document.title = "Home | Yard Protocol"
+        document.title = "About The Builders | Yard Protocol"
     }, [])
 
     return (

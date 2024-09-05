@@ -53,5 +53,12 @@
         "421614": "arbitrum",
         "534351": "scroll",
         "11155111": "sepolia"
+    },
+    "chainImages":{
+        "97": "/images/bsc.png",
+        "84532": "/images/base.png",
+        "421614": "/images/arbitrum.png",
+        "534351": "/images/scroll.png",
+        "11155111": "/images/sepolia.png"
     }
 }

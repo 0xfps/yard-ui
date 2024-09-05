@@ -24,3 +24,7 @@
     src: url("../../public/fonts/SFUIText-Bold.otf") format('opentype');
   }
 }
+
+.y-active {
+  color: #0391FF;
+}

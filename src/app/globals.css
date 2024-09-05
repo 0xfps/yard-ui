@@ -24,3 +24,24 @@
     src: url("../../public/fonts/SFUIText-Bold.otf") format('opentype');
   }
 }
+
+.y-active {
+  color: #0391FF;
+}
+
+#y-chain-dropdown,
+#y-connect-wallet-dropdown,
+#y-wallet-info-dropdown {
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+#y-chain-dropdown[datatype="visible"],
+#y-connect-wallet-dropdown[datatype="visible"],
+#y-wallet-info-dropdown[datatype="visible"] {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}

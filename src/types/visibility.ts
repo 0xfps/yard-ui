@@ -1,0 +1,1 @@
+export type VisibilityTypes = "visible" | "non-visible"

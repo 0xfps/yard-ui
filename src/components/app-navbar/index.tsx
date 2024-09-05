@@ -4,10 +4,26 @@ import { useAccount } from "wagmi"
 import ConnectWalletButton from "../connect-wallet-button"
 import CurrentChain from "../current-chain"
 import WalletInfo from "../wallet-info"
+import { useEffect } from "react"
+import { DEFAULT_CHAIN_ID } from "@/utils/constants"
+import { switchChain } from '@wagmi/core'
+import { wagmiConfig } from "../../../public/config/wagmi-config"
 
 export default function AppNavBar() {
-    const { isConnected } = useAccount()
-    
+    const { chainId, isConnected } = useAccount()
+
+    useEffect(function () {
+        if (!isConnected) return
+        
+        if (chainId != DEFAULT_CHAIN_ID) {
+            ; (async function () {
+                try {
+                    await switchChain(wagmiConfig, { chainId: DEFAULT_CHAIN_ID })
+                } catch (e) { }
+            })()
+        }
+    }, [isConnected])
+
     return (
         <div className="h-[80px] w-full p-2 flex justify-between items-center">
             {/* Logo and links. */}
@@ -19,7 +35,7 @@ export default function AppNavBar() {
             {/* Connect Wallet And Chain */}
             <div className="w-[20%] p-1 h-full flex items-center justify-between">
                 <CurrentChain />
-                {!isConnected ? <ConnectWalletButton/> : <WalletInfo/>}
+                {!isConnected ? <ConnectWalletButton /> : <WalletInfo />}
             </div>
         </div>
     )

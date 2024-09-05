@@ -12,8 +12,8 @@ export default function Footer() {
                 </a>
             </div>
             <div className="w-[5%] mt-4 m-auto flex flex-row justify-between items-center text-text text-[25px]">
-                <a href="https://github.com/0xfps/yard" target="_blank"><FaGithub /></a>
-                <a href="https://github.com/swaponyard" target="_blank"><FaXTwitter /></a>
+                <a href="https://github.com/0xfps" target="_blank" className="hover:opacity-80"><FaGithub /></a>
+                <a href="https://twitter.com/0xfps" target="_blank" className="hover:opacity-80"><FaXTwitter /></a>
             </div>
             <div className="text-center text-text font-sf-light text-[12px] mt-5 opacity-85">
                 &copy; 2024 Yard. All rights reserved.

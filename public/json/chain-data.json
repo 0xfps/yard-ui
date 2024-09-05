@@ -1,0 +1,57 @@
+{
+    "note": "This file will contain chain information like RPC details, et cetera.",
+    "chains": {
+        "arbitrum": {
+            "name": "Arbitrum Sepolia Testnet",
+            "alias": "Arbitrum",
+            "shortName": "Arb",
+            "chainId": "421614",
+            "chainIdHex": "0x66EEE",
+            "rpc": "https://sepolia-rollup.arbitrum.io/rpc",
+            "explorerUrl": "https://sepolia.arbiscan.io/"
+        },
+        "base": {
+            "name": "Base Sepolia Testnet",
+            "alias": "Base",
+            "shortName": "Base",
+            "chainId": "84532",
+            "chainIdHex": "0x14A34",
+            "rpc": "https://sepolia.base.org",
+            "explorerUrl": "https://sepolia.basescan.org/"
+        },
+        "bsc": {
+            "name": "BNB Smart Chain Testnet",
+            "alias": "BSC",
+            "shortName": "BSC",
+            "chainId": "97",
+            "chainIdHex": "0x61",
+            "rpc": "https://data-seed-prebsc-1-s1.bnbchain.org:8545",
+            "explorerUrl": "https://testnet.bscscan.com/"
+        },
+        "scroll": {
+            "name": "Scroll Sepolia Testnet",
+            "alias": "Scroll",
+            "shortName": "Scroll",
+            "chainId": "534351",
+            "chainIdHex": "0x8274F",
+            "rpc": "https://sepolia-rpc.scroll.io",
+            "explorerUrl": "https://sepolia.scrollscan.com/"
+        },
+        "sepolia": {
+            "name": "Ethereum Sepolia Testnet",
+            "alias": "Sepolia",
+            "shortName": "ETH",
+            "chainId": "11155111",
+            "chainIdHex": "0xAA36A7",
+            "rpc": "https://rpc.sepolia.org",
+            "explorerUrl": "https://sepolia.etherscan.io/"
+        }
+    },
+    "supportedChains": {
+        "97": "bsc",
+        "84532": "base",
+        "421614": "arbitrum",
+        "534351": "scroll",
+        "11155111": "sepolia"
+    }
+}

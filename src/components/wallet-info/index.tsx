@@ -85,10 +85,10 @@ export default function WalletInfo() {
         <>
             <div className="w-[157px] h-[48px] rounded-[12px] relative" id="y-wallet-info-button">
                 <GradientDiv>
-                    <button className="w-full h-full flex px-3 items-center font-sf-light justify-around bg-night rounded-[12px]" onClick={showDropdown}>
+                    <button className="w-full h-full flex px-2 items-center font-sf-light justify-around bg-night rounded-[12px]" onClick={showDropdown}>
                         <img src="/images/jazzicon.png" alt="Jazzicon" className="w-[20px] h-[20px] rounded-full" />
                         <span>
-                            {truncateAddress(address as string)}
+                            {truncateAddress(address as string, 5)}
                         </span>
                     </button>
                 </GradientDiv>

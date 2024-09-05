@@ -1,9 +1,13 @@
 "use client"
 
+import { useAccount } from "wagmi"
 import ConnectWalletButton from "../connect-wallet-button"
 import CurrentChain from "../current-chain"
+import WalletInfo from "../wallet-info"
 
 export default function AppNavBar() {
+    const { isConnected } = useAccount()
+    
     return (
         <div className="h-[80px] w-full p-2 flex justify-between items-center">
             {/* Logo and links. */}
@@ -15,7 +19,7 @@ export default function AppNavBar() {
             {/* Connect Wallet And Chain */}
             <div className="w-[20%] p-1 h-full flex items-center justify-between">
                 <CurrentChain />
-                <ConnectWalletButton/>
+                {!isConnected ? <ConnectWalletButton/> : <WalletInfo/>}
             </div>
         </div>
     )

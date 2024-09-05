@@ -8,7 +8,7 @@
             "chainId": "421614",
             "chainIdHex": "0x66EEE",
             "rpc": "https://sepolia-rollup.arbitrum.io/rpc",
-            "explorerUrl": "https://sepolia.arbiscan.io/"
+            "explorerUrl": "https://sepolia.arbiscan.io"
         },
         "base": {
             "name": "Base Sepolia Testnet",
@@ -17,7 +17,7 @@
             "chainId": "84532",
             "chainIdHex": "0x14A34",
             "rpc": "https://sepolia.base.org",
-            "explorerUrl": "https://sepolia.basescan.org/"
+            "explorerUrl": "https://sepolia.basescan.org"
         },
         "bsc": {
             "name": "BNB Smart Chain Testnet",
@@ -26,7 +26,7 @@
             "chainId": "97",
             "chainIdHex": "0x61",
             "rpc": "https://data-seed-prebsc-1-s1.bnbchain.org:8545",
-            "explorerUrl": "https://testnet.bscscan.com/"
+            "explorerUrl": "https://testnet.bscscan.com"
         },
         "scroll": {
             "name": "Scroll Sepolia Testnet",
@@ -35,7 +35,7 @@
             "chainId": "534351",
             "chainIdHex": "0x8274F",
             "rpc": "https://sepolia-rpc.scroll.io",
-            "explorerUrl": "https://sepolia.scrollscan.com/"
+            "explorerUrl": "https://sepolia.scrollscan.com"
         },
         "sepolia": {
             "name": "Ethereum Sepolia Testnet",
@@ -44,7 +44,7 @@
             "chainId": "11155111",
             "chainIdHex": "0xAA36A7",
             "rpc": "https://rpc.sepolia.org",
-            "explorerUrl": "https://sepolia.etherscan.io/"
+            "explorerUrl": "https://sepolia.etherscan.io"
         }
     },
     "supportedChains": {

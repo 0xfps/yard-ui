@@ -28,3 +28,22 @@
 .y-active {
   color: #0391FF;
 }
+
+#y-chain-dropdown {
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+#y-chain-dropdown[datatype="visible"] {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+/* 
+#y-chain-dropdown[datatype="non-visible"] {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+} */

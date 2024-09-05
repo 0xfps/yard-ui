@@ -27,6 +27,7 @@ const config: Config = {
       "background-cover": "rgba(6, 7, 10, 0.5)",
       "button": "#0391FF",
       "button-light": "#5BB7FF",
+      "button-light-rgb": "rgba(91, 183, 255, 0.5)",
       "night": "#242525",
       "night-light": "#585F65",
       "text": "#FFFFFF",

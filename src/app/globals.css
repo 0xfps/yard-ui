@@ -41,9 +41,16 @@
   transform: translateY(0);
   visibility: visible;
 }
-/* 
-#y-chain-dropdown[datatype="non-visible"] {
+
+#y-connect-wallet-dropdown {
   opacity: 0;
-  visibility: hidden;
   transform: translateY(-10px);
-} */
+  visibility: hidden;
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+#y-connect-wallet-dropdown[datatype="visible"] {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}

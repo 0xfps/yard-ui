@@ -45,7 +45,6 @@ export default function CurrentChain() {
     }
 
     useEffect(function () {
-        console.log(isVisible)
         const dropdownDiv = document.getElementById("y-chain-dropdown")
 
         if (!isVisible)
@@ -91,7 +90,7 @@ export default function CurrentChain() {
                 <div className="w-[200px] h-[300px] mt-2 rounded-[12px] absolute right-0" datatype="non-visible" id="y-chain-dropdown">
                     <GradientDiv>
                         <div className="w-full h-full p-3 font-sf-light bg-background rounded-[12px] flex flex-col justify-around">
-                            <div className="text-center font-sf-medium">
+                            <div className="text-left w-[95%] m-auto font-sf-medium text-[20px]">
                                 Select Chain
                             </div>
 

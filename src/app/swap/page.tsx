@@ -2,6 +2,8 @@
 
 import AppContainer from "@/components/app-container"
 import AppNavBar from "@/components/app-navbar"
+import SwapHeader from "@/components/swap-header"
+import SwapModal from "@/components/swap-modal"
 import { useEffect } from "react"
 
 export default function Swap() {
@@ -11,7 +13,9 @@ export default function Swap() {
     return (
         <>
             <AppContainer>
-                <AppNavBar/>
+                <AppNavBar />
+                <SwapHeader />
+                <SwapModal/>
             </AppContainer>
         </>
     )

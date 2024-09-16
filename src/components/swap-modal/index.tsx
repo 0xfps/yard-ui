@@ -5,8 +5,10 @@ import BottomNFTSelect from "../bottom-nft-select";
 import ToolTipDiv from "../tooltip";
 import { useSwapMode } from "@/store/swap-mode-store";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
+import { useAccount } from "wagmi";
 
 export default function SwapModal() {
+    const { isConnected } = useAccount()
     const { isArbitrarySwap, setIsArbitrarySwap } = useSwapMode()
 
     function toggleArbitrarySwap() {
@@ -39,11 +41,18 @@ export default function SwapModal() {
                         </div>
 
                         <div className="w-full flex justify-center items-center mt-6 transition ease-in-out delay-0 hover:opacity-80">
-                            <div className="w-full h-[70px] rounded-[12px] bg-button">
+                            <div className="w-full h-[70px] rounded-[12px] bg-button font-sf-light">
                                 <GradientDiv>
-                                    <button className="w-full h-full rounded-[12px] bg-button text-2xl">
-                                        Proceed to swap
-                                    </button>
+                                    {
+                                        isConnected
+                                            ? <button className="w-full h-full rounded-[12px] bg-button text-2xl">
+                                                Proceed to swap
+                                            </button>
+                                            : <button className="w-full h-full rounded-[12px] bg-button text-2xl cursor-not-allowed">
+                                                Connect wallet
+                                            </button>
+                                    }
+                                    
                                 </GradientDiv>
                             </div>
                         </div>

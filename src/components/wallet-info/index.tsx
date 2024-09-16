@@ -7,7 +7,7 @@ import { getChainName } from "@/utils/get-chain-name"
 import { getChainImage } from "@/utils/get-chain-image"
 import { DEFAULT_CHAIN_ID } from "@/utils/constants"
 import { truncateAddress } from "@/utils/truncate-address"
-import { FaPowerOff, FaRegCopy } from "react-icons/fa"
+import { FaClipboardCheck, FaPowerOff, FaRegCopy } from "react-icons/fa"
 import { FiExternalLink } from "react-icons/fi"
 import chainData from "../../../public/json/chain-data.json"
 import { disconnect } from '@wagmi/core'
@@ -20,8 +20,10 @@ export default function WalletInfo() {
     const [chainImg, setChainImg] = useState<string>("/images/arbitrum.png")
     const [chainName, setChainName] = useState<string>("Arbitrum")
     const [isVisible, setIsVisible] = useState<boolean>(false)
+    const [copied, setCopied] = useState<boolean>(false)
     // Click function should not work when any of these divs are clicked on.
-    const clickFunctionDontWork = ["y-wallet-info-button", "y-wallet-info-dropdown"]
+    // `undefined` for the copy icon. "" for the image.
+    const clickFunctionDontWork = ["y-wallet-info-button", "y-wallet-info-dropdown", undefined, ""]
 
     /**
      * Change the name of the chain and the image of the chain if the user connects
@@ -49,6 +51,11 @@ export default function WalletInfo() {
 
     async function copyAddress() {
         await navigator.clipboard.writeText(address as string)
+        setCopied(true)
+
+        setTimeout(function () {
+            setCopied(false)
+        }, 2000)
     }
 
     function showDropdown() {
@@ -110,7 +117,7 @@ export default function WalletInfo() {
                                                     <span>
                                                         <span>{truncateAddress(address as string, 7)}</span>
                                                     </span>
-                                                    <FaRegCopy />
+                                                    {!copied ? <FaRegCopy /> : <FaClipboardCheck />}
                                                 </div>
                                             </GradientDiv>
                                         </div>

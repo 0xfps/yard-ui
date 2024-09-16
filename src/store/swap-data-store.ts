@@ -2,7 +2,7 @@ import { SwapData } from '@/types/swap-data'
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
-export const useNFTData = create<SwapData>()(
+export const useSwapData = create<SwapData>()(
     persist(
         (set) => ({
             ownerNFTAddress: "",

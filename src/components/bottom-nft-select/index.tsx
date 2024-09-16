@@ -8,7 +8,7 @@ export default function BottomNFTSelect() {
             <div className="w-[250px] h-[45px] rounded-[12px] cursor-pointer text-xs font-sf-light">
                 <GradientDiv>
                     <div className="w-[full] h-[100%] bg-night rounded-[12px] flex justify-around items-center">
-                        <span>Select collections and NFTs</span>
+                        <span>Select NFT to receive</span>
                         <RiArrowDropDownLine className="text-xl" />
                     </div>
                 </GradientDiv>

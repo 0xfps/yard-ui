@@ -2,7 +2,7 @@ import { SwapMode } from '@/types/swap-mode'
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
-export const useNFTData = create<SwapMode>()(
+export const useSwapMode = create<SwapMode>()(
     persist(
         (set) => ({
             isArbitrarySwap: false,

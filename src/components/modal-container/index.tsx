@@ -3,11 +3,19 @@ import { useModal } from "@/store/modal-store";
 import GradientDiv from "../gradient-div";
 
 export default function ModalContainer({ children }: Props) {
-    const { currentModal } = useModal()
+    const { currentModal, setCurrentModal } = useModal()
+
+    function closeModal(e: any) {
+        if (e.target.id == "modal-container") {
+            // @todo Uncomment this line after all is done.
+            // setCurrentModal("")
+        }
+    }
+
     return (
         currentModal != "" &&
-        <div className="w-full h-full p-10 flex justify-center items-center backdrop-blur-md absolute z-10">
-            <div>
+        <div className="w-full h-full p-10 flex justify-center items-center backdrop-blur-md absolute z-10" id="modal-container" onClick={closeModal}>
+            <div id="modal-box">
                 <GradientDiv>
                     <div className="w-full h-full bg-background rounded-[12px]">
                         {children}

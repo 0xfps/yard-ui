@@ -30,7 +30,7 @@ export default function AppNavBar() {
         <div className="h-[80px] w-full p-2 flex justify-between items-center">
             {/* Logo and links. */}
             <div className="w-[15%] p-1 h-full flex justify-around items-center font-sf-light text-sm">
-                <img src="/images/yard.png" alt="Yard Logo" className="w-[55px] h-[55px]" />
+                <a href="/swap"><img src="/images/yard.png" alt="Yard Logo" className="w-[55px] h-[55px]" /></a>
                 <a href="/liquidity" className="hover:opacity-90">Provide liquidity</a>
                 <a href="/liquidity" className="y-active hover:opacity-90">Swap</a>
             </div>

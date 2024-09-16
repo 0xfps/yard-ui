@@ -22,7 +22,7 @@ export default function SwapModal() {
     `
 
     return (
-        <div className="w-screen">
+        <div className="w-full">
             <div className="w-[554px] h-[495px] mt-8 rounded-[12px] m-auto">
                 <GradientDiv>
                     <div className="w-full h-full px-5 bg-background rounded-[12px]">

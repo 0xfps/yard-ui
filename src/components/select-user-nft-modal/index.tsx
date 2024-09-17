@@ -56,7 +56,6 @@ export default function SelectUserNFTModal() {
             return ((token_id.toLowerCase().includes(e.target.value) || name.toLowerCase().includes(e.target.value)))
         })
 
-        console.log(e.target.value, filteredNFTs)
         setUsersOwnedNFTs(filteredNFTs)
     }
 

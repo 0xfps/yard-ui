@@ -14,7 +14,7 @@ import { useModal } from "@/store/modal-store"
 
 export default function SelectUserNFTModal() {
     const { address, isConnected, chainId } = useAccount()
-    const [isOnSupportedChain, setIsOnSupportedChain] = useState<boolean>(false)
+    const [isOnSupportedChain, setIsOnSupportedChain] = useState<boolean>(isSupportedChain(chainId))
     /**
      * `null` when loading.
      * `[]` if there was an error in fetching the NFTs.
@@ -104,7 +104,7 @@ export default function SelectUserNFTModal() {
                                     {
                                         usersOwnedNFTs.map(function ({ contract_address, image_url, name, token_id }: SimpleHashNFTResponse, index: number) {
                                             return (
-                                                <div className="w-full h-fit m-auto my-2 rounded-md cursor-pointer flex items-center transition:ease-in-out delay-0 hover:bg-[#192126]" onClick={() => setOwnerNFTData({ contract_address, image_url, name, token_id })}>
+                                                <div key={index} className="w-full h-fit m-auto my-2 rounded-md cursor-pointer flex items-center transition:ease-in-out delay-0 hover:bg-[#192126]" onClick={() => setOwnerNFTData({ contract_address, image_url, name, token_id })}>
                                                     <img src={image_url} alt={titleCase(name)} className="w-[50px] h-[50px] rounded-md" />
                                                     <p className="font-sf-medium text-sm ml-3">{name} #{token_id}</p>
                                                 </div>

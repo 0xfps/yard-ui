@@ -1,21 +1,29 @@
 import { useAccount } from "wagmi"
-import { wagmiConfig } from "../../../public/config/wagmi-config"
-import { switchChain } from '@wagmi/core'
-import { ARBITRUM_CHAIN_ID, BASE_CHAIN_ID, BSC_CHAIN_ID, SCROLL_CHAIN_ID, SEPOLIA_CHAIN_ID } from "@/utils/constants"
 import { useEffect, useState } from "react"
 import { isSupportedChain } from "@/utils/is-supported-chain"
 import { SupportedChains } from "@/types/supported-chains"
+import { getNFTsOwnedByAddress } from "@/utils/fetchers/get-nfts-owned-by-address"
+import { SimpleHashNFTResponse } from "@/interfaces/simple-hash-nft-response"
+import UserNotOnSupportedChainForSwap from "../user-not-on-supported-chain-for-swap"
+import { FaBoxOpen, FaSearch } from "react-icons/fa"
+import Spinner from "../spinner"
+import { getChainName } from "@/utils/get-chain-name"
+import { titleCase } from "@/utils/title-case"
+import { useSwapData } from "@/store/swap-data-store"
+import { useModal } from "@/store/modal-store"
 
 export default function SelectUserNFTModal() {
     const { address, isConnected, chainId } = useAccount()
     const [isOnSupportedChain, setIsOnSupportedChain] = useState<boolean>(false)
-
-    async function switchToChain(chainId: number) {
-        if (!isConnected) return
-        try {
-            await switchChain(wagmiConfig, { chainId: chainId as any })
-        } catch { }
-    }
+    /**
+     * `null` when loading.
+     * `[]` if there was an error in fetching the NFTs.
+     * `SimpleHashNFTResponse[]` (length >= 0) if data is fetched.
+     */
+    const [usersOwnedNFTs, setUsersOwnedNFTs] = useState<SimpleHashNFTResponse[] | null>(null)
+    const [allNFTs, setAllNFTs] = useState<SimpleHashNFTResponse[]>([])
+    const { setOwnerNFTAddress, setOwnerNFTId, setOwnerNFTImage, setOwnerNFTName, setSwapChainId } = useSwapData()
+    const { removeCurrentModal } = useModal()
 
     useEffect(function () {
         const isOnSupportedChain = isSupportedChain(chainId)
@@ -23,36 +31,90 @@ export default function SelectUserNFTModal() {
 
         if (!chainId) return
         if (!isOnSupportedChain || !isConnected || !address) return
-            ; (async function () {
-                // Load up NFTs here.
-            })()
+
+        (async function () {
+            setUsersOwnedNFTs(null)
+            const nfts = await getNFTsOwnedByAddress(address, chainId as SupportedChains)
+            if (!nfts) {
+                setUsersOwnedNFTs([])
+                return
+            }
+
+            setUsersOwnedNFTs(nfts)
+            setAllNFTs(nfts)
+        })()
     }, [chainId])
 
+    function sortNFTs(e: any) {
+        if (!allNFTs || allNFTs?.length == 0) return
+        if (e.target.value.replace(/ /g, "") == "") {
+            setUsersOwnedNFTs(allNFTs)
+            return
+        }
+
+        const filteredNFTs = allNFTs?.filter(function ({ name, token_id }) {
+            return ((token_id.toLowerCase().includes(e.target.value) || name.toLowerCase().includes(e.target.value)))
+        })
+
+        console.log(e.target.value, filteredNFTs)
+        setUsersOwnedNFTs(filteredNFTs)
+    }
+
+    function setOwnerNFTData(data: SimpleHashNFTResponse) {
+        setOwnerNFTAddress(data.contract_address)
+        setOwnerNFTId(parseInt(data.token_id))
+        setOwnerNFTImage(data.image_url)
+        setOwnerNFTName(data.name)
+        setSwapChainId(chainId!)
+        removeCurrentModal()
+    }
 
     return (
         <div className="w-[350px] h-[400px] p-5">
             {
                 !isOnSupportedChain
-                    ? <>
-                        <div className="text-text text-center font-sf-bold text-lg">
-                            <p>You're Not On A Supported Chain</p>
+                    ? <UserNotOnSupportedChainForSwap />
+                    : <div className="w-full h-full text-text">
+                        <div className="w-full font-sf-bold text-xl">
+                            Select NFT
                         </div>
 
-                        <div className="flex justify-between items-center h-[80px] mt-12 px-2">
-                            <img src="/images/arbitrum.png" title="Arbitrum Sepolia Testnet" alt="Arbitrum" className="w-[40px] h-[40px] cursor-pointer" onClick={() => switchToChain(ARBITRUM_CHAIN_ID)} />
-                            <img src="/images/base.png" title="Base Sepolia Testnet" alt="Base" className="w-[40px] h-[40px] cursor-pointer" onClick={() => switchToChain(BASE_CHAIN_ID)} />
-                            <img src="/images/bsc.png" title="BSC Testnet" alt="BSC" className="w-[40px] h-[40px] cursor-pointer" onClick={() => switchToChain(BSC_CHAIN_ID)} />
-                            <img src="/images/scroll.png" title="Scroll Sepolia Testnet" alt="Scroll" className="w-[40px] h-[40px] cursor-pointer" onClick={() => switchToChain(SCROLL_CHAIN_ID)} />
-                            <img src="/images/sepolia.png" title="Ethereum Sepolia Testnet" alt="Sepolia" className="w-[40px] h-[40px] cursor-pointer" onClick={() => switchToChain(SEPOLIA_CHAIN_ID)} />
+                        <div className="mt-3 w-full h-[13%] flex justify-center items-center relative">
+                            <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search" onChange={sortNFTs} />
+                            <FaSearch className="text-xs absolute right-0 mr-5" />
                         </div>
-
-                        <div className="text-sm font-sf-light mt-12 text-center">
-                            We discovered that you are not connected to a chain that Yard supports, please click on one
-                            of the chains above that we support to access the features of Yard.
+                        <div className="w-full h-[70%] mt-5 overflow-y-scroll">
+                            {
+                                usersOwnedNFTs === null &&
+                                <div className="w-full h-full flex flex-col justify-center items-center">
+                                    <Spinner />
+                                    <span className="text-xs mt-2">Fetching your NFTs on {titleCase(getChainName(chainId) ?? "")}...</span>
+                                </div>
+                            }
+                            {
+                                ((usersOwnedNFTs !== null) && usersOwnedNFTs?.length == 0) &&
+                                <div className="w-full h-full flex flex-col justify-center items-center">
+                                    <FaBoxOpen className="text-2xl text-text" />
+                                    <span className="text-xs mt-2">No NFTs found on {titleCase(getChainName(chainId) ?? "")}.</span>
+                                </div>
+                            }
+                            {
+                                ((usersOwnedNFTs !== null) && usersOwnedNFTs?.length > 0) &&
+                                <div className="w-[full] h-full">
+                                    {
+                                        usersOwnedNFTs.map(function ({ contract_address, image_url, name, token_id }: SimpleHashNFTResponse, index: number) {
+                                            return (
+                                                <div className="w-full h-fit m-auto my-2 rounded-md cursor-pointer flex items-center transition:ease-in-out delay-0 hover:bg-[#192126]" onClick={() => setOwnerNFTData({ contract_address, image_url, name, token_id })}>
+                                                    <img src={image_url} alt={titleCase(name)} className="w-[50px] h-[50px] rounded-md" />
+                                                    <p className="font-sf-medium text-sm ml-3">{name} #{token_id}</p>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            }
                         </div>
-                    </>
-                    : <>
-                    </>
+                    </div>
             }
         </div>
     )

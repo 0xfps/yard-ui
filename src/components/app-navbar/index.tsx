@@ -16,9 +16,9 @@ export default function AppNavBar() {
     useEffect(function () {
         setUserIsConnected(isConnected)
         if (!isConnected) return
-        
+
         if (chainId != DEFAULT_CHAIN_ID) {
-            ; (async function () {
+            (async function () {
                 try {
                     await switchChain(wagmiConfig, { chainId: DEFAULT_CHAIN_ID })
                 } catch (e) { }

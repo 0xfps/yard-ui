@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@covalenthq/client-sdk": "^2.1.1",
     "@nextui-org/react": "^2.4.6",
     "@tanstack/react-query": "^5.54.1",
     "dotenv": "^16.4.5",

@@ -22,7 +22,7 @@ export default function SelectUserNFTModal() {
      */
     const [usersOwnedNFTs, setUsersOwnedNFTs] = useState<SimpleHashNFTResponse[] | null>(null)
     const [allNFTs, setAllNFTs] = useState<SimpleHashNFTResponse[]>([])
-    const { setOwnerNFTAddress, setOwnerNFTId, setOwnerNFTImage, setOwnerNFTName } = useSwapData()
+    const { setOwnerNFTAddress, setOwnerNFTId, setOwnerNFTImage, setOwnerNFTName, setSwapChainId } = useSwapData()
     const { removeCurrentModal } = useModal()
 
     useEffect(function () {
@@ -65,6 +65,7 @@ export default function SelectUserNFTModal() {
         setOwnerNFTId(parseInt(data.token_id))
         setOwnerNFTImage(data.image_url)
         setOwnerNFTName(data.name)
+        setSwapChainId(chainId!)
         removeCurrentModal()
     }
 

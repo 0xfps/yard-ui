@@ -7,6 +7,7 @@ import { useSwapMode } from "@/store/swap-mode-store";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
 import { useAccount } from "wagmi";
 import { useSwapData } from "@/store/swap-data-store";
+import { ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips";
 
 export default function SwapModal() {
     const { isConnected } = useAccount()
@@ -16,12 +17,6 @@ export default function SwapModal() {
     function toggleArbitrarySwap() {
         setIsArbitrarySwap(!isArbitrarySwap)
     }
-
-    const ARBITRARY_SWAP_CONTENT = `
-        Normal swaps allow you to select which NFTs to choose from the pool.
-        Arbitrary swaps give allows you to not care about what comes from the pool,
-        but instead, swap for a random NFT that exists in the pool.
-    `
 
     return (
         <div className="w-full">

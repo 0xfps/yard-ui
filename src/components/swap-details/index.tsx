@@ -3,6 +3,7 @@ import { LuRefreshCw } from "react-icons/lu";
 import GradientDiv from "../gradient-div";
 import { useEffect, useState } from "react";
 import abis from "../../../public/json/abis.json"
+import deployments from "../../../public/json/deployments.json"
 import { getChainName } from "@/utils/get-chain-name";
 import { getChainRPC } from "@/utils/get-chain-rpc";
 import { ethers } from "ethers";
@@ -16,13 +17,18 @@ import { wagmiConfig } from "../../../public/config/wagmi-config";
 import { SupportedChains } from "@/types/supported-chains";
 import { getUrlForAddress } from "@/utils/get-url";
 import { useModal } from "@/store/modal-store";
+import { APPROVE_BALANCE_OF_ABI, APPROVE_NFT_ABI } from "@/utils/constants";
+import { writeContract } from '@wagmi/core'
+import { waitForTransactionReceipt } from '@wagmi/core'
 
 export default function SwapDetails() {
-    const { chainId } = useAccount()
+    const { address, chainId } = useAccount()
     const [fee, setFee] = useState<number | null>(null)
     const [inProgress, setInProgress] = useState<boolean>(false)
     const [progressStatus, setProgressStatus] = useState<"Approving Fee" | "Approving NFT" | "Swapping">("Approving Fee")
     const [hasAgreed,] = useState<boolean>(localStorage.getItem("agreement") == "true" || false)
+    const [balance, setBalance] = useState<number>(0)
+    const [canSwap, setCanSwap] = useState<boolean>(false)
 
     const {
         ownerNFTImage, ownerNFTName, ownerNFTAddress, ownerNFTID,
@@ -37,10 +43,18 @@ export default function SwapDetails() {
         const rpc = getChainRPC(chainName as string)
         const provider = new ethers.JsonRpcProvider(rpc)
         const YardPair = new ethers.Contract(pair, pairAbi as any, provider)
+        // @ts-ignore
+        const feeToken = deployments[chainName].feeToken
+        const FeeToken = new ethers.Contract(feeToken, APPROVE_BALANCE_OF_ABI, provider)
 
             ; (async function () {
                 const fee = await YardPair.swapFee()
-                setFee(Number(fee) / 1e6)
+                const feeBase = Number(fee) / 1e6
+                const balance = await FeeToken.balanceOf(address)
+                setFee(feeBase)
+                const balanceBase = Number(balance) / 1e6
+                setBalance(balanceBase)
+                setCanSwap(balanceBase >= feeBase)
             })()
     }, [])
 
@@ -50,6 +64,7 @@ export default function SwapDetails() {
 
     async function handleSwap() {
         if (inProgress) return
+        if (!fee) return
 
         if (chainId != swapChainId) {
             try {
@@ -63,7 +78,126 @@ export default function SwapDetails() {
             setCurrentModal("DISCLAIMER")
             return
         }
+
+        setInProgress(true)
+        const feeApproved = await feeApproval()
+
+        if (feeApproved) {
+            const nftApproved = await nftApproval()
+
+            if (nftApproved) {
+                const nftSwapped = await nftSwap()
+
+                if (nftSwapped) {
+                    setInProgress(false)
+                    setCurrentModal("TRANSACTION_SUCCESSFUL")
+                }
+            }
+        }
+
+        setInProgress(false)
     }
+
+    async function feeApproval(): Promise<boolean> {
+        setProgressStatus("Approving Fee")
+        const chainName = getChainName(swapChainId as number)
+        // @ts-ignore
+        const { feeToken, router } = deployments[chainName]
+        let hash: any
+        try {
+            hash = await writeContract(wagmiConfig, {
+                abi: APPROVE_BALANCE_OF_ABI,
+                address: feeToken,
+                functionName: "approve",
+                args: [
+                    router,
+                    BigInt(fee! * 1e6)
+                ]
+            })
+
+            if (hash) {
+                const transactionReceipt = await waitForTransactionReceipt(wagmiConfig, { hash })
+                if (transactionReceipt) {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
+    }
+
+    async function nftApproval(): Promise<boolean> {
+        setProgressStatus("Approving NFT")
+        const chainName = getChainName(swapChainId as number)
+        // @ts-ignore
+        const { router } = deployments[chainName]
+        let hash: any
+
+        try {
+            hash = await writeContract(wagmiConfig, {
+                abi: APPROVE_NFT_ABI,
+                address: ownerNFTAddress as any,
+                functionName: "approve",
+                args: [
+                    router,
+                    ownerNFTID
+                ]
+            })
+
+            if (hash) {
+                const transactionReceipt = await waitForTransactionReceipt(wagmiConfig, { hash })
+                if (transactionReceipt) {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
+    }
+
+    async function nftSwap(): Promise<boolean> {
+        setProgressStatus("Swapping")
+        const chainName = getChainName(swapChainId as number)
+        // @ts-ignore
+        const { router } = deployments[chainName]
+        const { router: abi } = abis
+        let hash: any
+        try {
+            hash = await writeContract(wagmiConfig, {
+                abi,
+                address: router,
+                functionName: "swapNFTForExactNFT",
+                args: [
+                    [ownerNFTAddress, selectedNFTAddress],
+                    ownerNFTID,
+                    selectedNFTId,
+                    address
+                ]
+            })
+
+            if (hash) {
+                const transactionReceipt = await waitForTransactionReceipt(wagmiConfig, { hash })
+                if (transactionReceipt) {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
+    }
+
     return (
         <div className="w-[554px] h-[495px] rounded-[12px]">
             <div className="w-[90%] h-full p-5 bg-background m-auto">
@@ -96,7 +230,7 @@ export default function SwapDetails() {
                                 {/* Blur. */}
                                 <div className="w-[100px] h-[100px] bg-button absolute left-[17%] blur-3xl"></div>
                                 <div className="w-[60%] h-[90%] p-1 flex flex-col justify-around">
-                                    <div className="w-full h-[60%] flex justify-center items-center">
+                                    <div className="w-full h-[50%] flex justify-center items-center">
                                         <div className="align-middle flex justify-center items-center">
                                             <span className="font-sf-light">Swap fee:</span>
                                             <span className="ml-1 text-5xl font-sf-bold">{fee === null ? <Spinner /> : fee}</span>
@@ -105,6 +239,9 @@ export default function SwapDetails() {
                                                 yUSDC
                                             </span>
                                         </div>
+                                    </div>
+                                    <div className="w-full h-[15%] text-[11px] flex justify-start ps-8 items-center">
+                                        <span className="cursor-pointer">Balance: <span>{balance} <img src="/images/usdc.svg" alt="yUSDC" className="w-[10px] h-[10px] inline mb-[2px]" /> yUSDC</span> <img src={getChainImage(swapChainId as number)} alt={getChainName(swapChainId as number)} className="w-[10px] h-[10px] inline mb-[2px]" /></span>
                                     </div>
                                     <div className="w-full h-[15%] text-[11px] flex justify-start ps-8 items-center">
                                         <a href={getUrlForAddress(swapChainId as SupportedChains, pair)} target="_blank"><span className="cursor-pointer">Pair: <span>{truncateAddress(pair, 10)}</span> <img src={getChainImage(swapChainId as number)} alt={getChainName(swapChainId as number)} className="w-[10px] h-[10px] inline mb-[2px]" /></span></a>
@@ -131,7 +268,9 @@ export default function SwapDetails() {
                                                 ? <div className="w-full flex justify-center items-center">
                                                     {progressStatus}... <span className="ml-3"><Spinner /></span>
                                                 </div>
-                                                : "Approve and Swap"
+                                                : <div className={`w-full h-full flex justify-center items-center ${!canSwap && "cursor-not-allowed opacity-40"}`}>
+                                                    Approve and swap
+                                                </div>
                                 }
                             </div>
                         </GradientDiv>

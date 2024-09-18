@@ -7,7 +7,7 @@ import { getChainName } from "@/utils/get-chain-name"
 import { CollectionInterface } from "@/interfaces/collection"
 import { getChainRPC } from "@/utils/get-chain-rpc"
 import { ethers } from "ethers"
-import { FaSearch } from "react-icons/fa"
+import { FaSearch, FaToggleOn } from "react-icons/fa"
 import Spinner from "../spinner"
 import { FcCancel } from "react-icons/fc"
 import { getNFTsById } from "@/utils/fetchers/get-nfts-by-token-id"
@@ -16,11 +16,18 @@ import { SimpleHashNFTResponse } from "@/interfaces/simple-hash-nft-response"
 import { titleCase } from "@/utils/title-case"
 import { useModal } from "@/store/modal-store"
 import { useSwapMode } from "@/store/swap-mode-store"
+import ToolTipDiv from "../tooltip"
+import { ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips"
+import { FaToggleOff } from "react-icons/fa6"
 
 export default function SelectUserReceivedNFTModal() {
-    const { swapChainId, ownerNFTAddress, setSelectedNFTAddress, setSelectedNFTId, setSelectedNFTName, setSelectedNFTImage } = useSwapData()
+    const {
+        swapChainId, ownerNFTAddress, selectedNFTAddress,
+        setSelectedNFTAddress, setSelectedNFTId, setSelectedNFTName,
+        setSelectedNFTImage, setRouter, setPair
+    } = useSwapData()
     const { removeCurrentModal } = useModal()
-    const { isArbitrarySwap } = useSwapMode()
+    const { isArbitrarySwap, setIsArbitrarySwap } = useSwapMode()
     const [nfts, setNfts] = useState<CollectionInterface[]>([])
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
@@ -43,6 +50,11 @@ export default function SelectUserReceivedNFTModal() {
     }, [])
 
     function sortNFTs(e: any) {
+        if ((e.target.value.slice(0, 2) == "0x") && (e.target.value.length == 42)) {
+            loadData({ address: e.target.value } as CollectionInterface, Math.random())
+            return
+        }
+
         if (!allNftsInPair || allNftsInPair?.length == 0) return
         if (e.target.value.replace(/ /g, "") == "") {
             setNftsInPair(allNftsInPair)
@@ -57,7 +69,9 @@ export default function SelectUserReceivedNFTModal() {
     }
 
     async function loadData({ address }: CollectionInterface, index: number) {
-        if (selectedIndex == index) return
+        if (!isArbitrarySwap) {
+            if (selectedIndex == index) return
+        }
 
         setLoading(true)
         setSelectedIndex(index)
@@ -99,6 +113,8 @@ export default function SelectUserReceivedNFTModal() {
             setAllNftsInPair(reserveNFTsData)
         }
 
+        setRouter(router)
+        setPair(pair)
         setSelectedNFTAddress(address)
         setLoading(false)
     }
@@ -109,6 +125,18 @@ export default function SelectUserReceivedNFTModal() {
         setSelectedNFTName(data.name)
         removeCurrentModal()
     }
+
+    function toggleArbitrarySwap() {
+        setIsArbitrarySwap(!isArbitrarySwap)
+    }
+
+    useEffect(function () {
+        if (!isArbitrarySwap) return
+
+        if ((selectedIndex !== null) && (selectedNFTAddress != "")) {
+            loadData({ address: selectedNFTAddress } as CollectionInterface, selectedIndex)
+        }
+    }, [isArbitrarySwap])
 
     return (
         <div className="w-[400px] max-h-[600px] py-5">
@@ -134,8 +162,16 @@ export default function SelectUserReceivedNFTModal() {
                         })
                     }
                 </div>
-                <div className="mt-4 w-full h-[60px] flex justify-center items-center relative">
-                    <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search" onChange={sortNFTs} />
+                <div className="w-full h-[60px] flex justify-end items-center text-xs cursor-pointer font-sf-light">
+                    <ToolTipDiv trigger="Arbitrary swap" content={ARBITRARY_SWAP_CONTENT} />
+                    {
+                        isArbitrarySwap
+                            ? <FaToggleOn className="text-3xl cursor-pointer ml-3 text-button" onClick={toggleArbitrarySwap} />
+                            : <FaToggleOff className="text-3xl cursor-pointer ml-3 text-button opacity-70" onClick={toggleArbitrarySwap} />
+                    }
+                </div>
+                <div className="w-full h-[60px] flex justify-center items-center relative">
+                    <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search or paste collection address" onChange={sortNFTs} />
                     <FaSearch className="text-xs absolute right-0 mr-5" />
                 </div>
                 <div className="mt-4 w-full max-h-[320px] overflow-y-scroll">

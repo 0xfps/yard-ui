@@ -7,21 +7,18 @@ import { useSwapMode } from "@/store/swap-mode-store";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
 import { useAccount } from "wagmi";
 import { useSwapData } from "@/store/swap-data-store";
+import { ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips";
+import { useModal } from "@/store/modal-store";
 
 export default function SwapModal() {
     const { isConnected } = useAccount()
     const { isArbitrarySwap, setIsArbitrarySwap } = useSwapMode()
     const { ownerNFTID, selectedNFTId } = useSwapData()
+    const { setCurrentModal } = useModal()
 
     function toggleArbitrarySwap() {
         setIsArbitrarySwap(!isArbitrarySwap)
     }
-
-    const ARBITRARY_SWAP_CONTENT = `
-        Normal swaps allow you to select which NFTs to choose from the pool.
-        Arbitrary swaps give allows you to not care about what comes from the pool,
-        but instead, swap for a random NFT that exists in the pool.
-    `
 
     return (
         <div className="w-full">
@@ -51,6 +48,7 @@ export default function SwapModal() {
                                                 className={`w-full h-full rounded-[12px] bg-button text-2xl ${(ownerNFTID === null || selectedNFTId === null) && "cursor-not-allowed"}`}
                                                 onClick={() => {
                                                     if ((ownerNFTID === null || selectedNFTId === null)) return
+                                                    setCurrentModal("SWAP_DETAILS")
                                                 }}
                                             >
                                                 {

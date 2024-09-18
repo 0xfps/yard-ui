@@ -6,10 +6,12 @@ import ToolTipDiv from "../tooltip";
 import { useSwapMode } from "@/store/swap-mode-store";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
 import { useAccount } from "wagmi";
+import { useSwapData } from "@/store/swap-data-store";
 
 export default function SwapModal() {
     const { isConnected } = useAccount()
     const { isArbitrarySwap, setIsArbitrarySwap } = useSwapMode()
+    const { ownerNFTID, selectedNFTId } = useSwapData()
 
     function toggleArbitrarySwap() {
         setIsArbitrarySwap(!isArbitrarySwap)
@@ -45,14 +47,23 @@ export default function SwapModal() {
                                 <GradientDiv>
                                     {
                                         isConnected
-                                            ? <button className="w-full h-full rounded-[12px] bg-button text-2xl">
-                                                Proceed to swap
+                                            ? <button
+                                                className={`w-full h-full rounded-[12px] bg-button text-2xl ${(ownerNFTID === null || selectedNFTId === null) && "cursor-not-allowed"}`}
+                                                onClick={() => {
+                                                    if ((ownerNFTID === null || selectedNFTId === null)) return
+                                                }}
+                                            >
+                                                {
+                                                    (ownerNFTID !== null && selectedNFTId !== null) ?
+                                                        "Proceed to swap"
+                                                        : "Select NFT Pair"
+                                                }
                                             </button>
                                             : <button className="w-full h-full rounded-[12px] bg-button text-2xl cursor-not-allowed">
                                                 Connect wallet
                                             </button>
                                     }
-                                    
+
                                 </GradientDiv>
                             </div>
                         </div>

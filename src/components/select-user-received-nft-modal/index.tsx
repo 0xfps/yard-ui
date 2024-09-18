@@ -43,6 +43,10 @@ export default function SelectUserReceivedNFTModal() {
     }, [])
 
     function sortNFTs(e: any) {
+        if ((e.target.value.slice(0, 2) == "0x") && (e.target.value.length == 42)) {
+            loadData({ address: e.target.value } as CollectionInterface, Number.MAX_SAFE_INTEGER)
+        }
+
         if (!allNftsInPair || allNftsInPair?.length == 0) return
         if (e.target.value.replace(/ /g, "") == "") {
             setNftsInPair(allNftsInPair)
@@ -135,7 +139,7 @@ export default function SelectUserReceivedNFTModal() {
                     }
                 </div>
                 <div className="mt-4 w-full h-[60px] flex justify-center items-center relative">
-                    <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search" onChange={sortNFTs} />
+                    <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search or paste collection address" onChange={sortNFTs} />
                     <FaSearch className="text-xs absolute right-0 mr-5" />
                 </div>
                 <div className="mt-4 w-full max-h-[320px] overflow-y-scroll">

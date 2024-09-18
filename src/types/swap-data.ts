@@ -32,4 +32,5 @@ export type SwapData = {
 
     setHash: (hash: string) => void
     setFailureReason: (reason: string) => void
+    clear: () => void
 }

@@ -8,7 +8,8 @@ import { SupportedChains } from "@/types/supported-chains"
 export default function SuccessModal() {
     const {
         ownerNFTImage, ownerNFTName, ownerNFTID, swapChainId,
-        selectedNFTImage, selectedNFTName, selectedNFTId, hash
+        selectedNFTImage, selectedNFTName, selectedNFTId, hash,
+        clear
     } = useSwapData()
     const { setCurrentModal } = useModal()
 
@@ -46,7 +47,7 @@ export default function SuccessModal() {
                 <div className="mt-2">
                     <a href={getUrlForTransaction(swapChainId as SupportedChains, hash)} className="text-xs hover:opacity-80" target="_blank">View transaction</a>
                 </div>
-                <div className="w-full h-[60px] bg-button mt-3 rounded-[12px] hover:opacity-85" onClick={() => setCurrentModal("")}>
+                <div className="w-full h-[60px] bg-button mt-3 rounded-[12px] hover:opacity-85" onClick={() => { setCurrentModal(""); clear() }}>
                     <GradientDiv>
                         <div className="w-full h-full bg-button rounded-[12px] text-center flex justify-center items-center font-sf-medium text-2xl cursor-pointer">
                             Close

@@ -21,7 +21,11 @@ import { ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips"
 import { FaToggleOff } from "react-icons/fa6"
 
 export default function SelectUserReceivedNFTModal() {
-    const { swapChainId, ownerNFTAddress, selectedNFTAddress, setSelectedNFTAddress, setSelectedNFTId, setSelectedNFTName, setSelectedNFTImage } = useSwapData()
+    const {
+        swapChainId, ownerNFTAddress, selectedNFTAddress,
+        setSelectedNFTAddress, setSelectedNFTId, setSelectedNFTName,
+        setSelectedNFTImage, setRouter, setPair
+    } = useSwapData()
     const { removeCurrentModal } = useModal()
     const { isArbitrarySwap, setIsArbitrarySwap } = useSwapMode()
     const [nfts, setNfts] = useState<CollectionInterface[]>([])
@@ -109,6 +113,8 @@ export default function SelectUserReceivedNFTModal() {
             setAllNftsInPair(reserveNFTsData)
         }
 
+        setRouter(router)
+        setPair(pair)
         setSelectedNFTAddress(address)
         setLoading(false)
     }

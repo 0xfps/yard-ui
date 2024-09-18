@@ -11,6 +11,7 @@ export type SwapData = {
     
     swapChainId: number | null
     router: string
+    pair: string
 
     setOwnerNFTAddress: (address: string) => void
     setOwnerNFTId: (id: number) => void
@@ -24,4 +25,5 @@ export type SwapData = {
     
     setSwapChainId: (id: number | null) => void
     setRouter: (router: string) => void
+    setPair: (pair: string) => void
 }

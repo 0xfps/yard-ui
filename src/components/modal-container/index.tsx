@@ -1,13 +1,19 @@
 import { Props } from "@/interfaces/props";
 import { useModal } from "@/store/modal-store";
 import GradientDiv from "../gradient-div";
+import { useSwapData } from "@/store/swap-data-store";
 
 export default function ModalContainer({ children }: Props) {
     const { currentModal, setCurrentModal } = useModal()
+    const { clear } = useSwapData()
 
     function closeModal(e: any) {
         if (e.target.id == "modal-container") {
             setCurrentModal("")
+            
+            if (currentModal == "TRANSACTION_SUCCESSFUL") {
+                clear()
+            }
         }
     }
 

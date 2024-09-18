@@ -33,7 +33,7 @@ export default function SwapDetails() {
     const {
         ownerNFTImage, ownerNFTName, ownerNFTAddress, ownerNFTID,
         selectedNFTImage, selectedNFTName, selectedNFTAddress, selectedNFTId,
-        swapChainId, pair, router
+        swapChainId, pair, router, setHash
     } = useSwapData()
     const { setPreviousModal, setCurrentModal } = useModal()
 
@@ -186,6 +186,7 @@ export default function SwapDetails() {
             if (hash) {
                 const transactionReceipt = await waitForTransactionReceipt(wagmiConfig, { hash })
                 if (transactionReceipt) {
+                    setHash(hash)
                     return true
                 } else {
                     return false

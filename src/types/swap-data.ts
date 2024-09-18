@@ -13,6 +13,8 @@ export type SwapData = {
     router: string
     pair: string
 
+    failureReason: string
+
     setOwnerNFTAddress: (address: string) => void
     setOwnerNFTId: (id: number) => void
     setOwnerNFTImage: (img: string) => void
@@ -26,4 +28,6 @@ export type SwapData = {
     setSwapChainId: (id: number | null) => void
     setRouter: (router: string) => void
     setPair: (pair: string) => void
+
+    setFailureReason: (reason: string) => void
 }

@@ -15,19 +15,21 @@ import { switchChain } from '@wagmi/core'
 import { wagmiConfig } from "../../../public/config/wagmi-config";
 import { SupportedChains } from "@/types/supported-chains";
 import { getUrlForAddress } from "@/utils/get-url";
+import { useModal } from "@/store/modal-store";
 
 export default function SwapDetails() {
     const { chainId } = useAccount()
     const [fee, setFee] = useState<number | null>(null)
     const [inProgress, setInProgress] = useState<boolean>(false)
-    const [progressStatus, setProgressStatus] = useState<"Approving" | "Swapping">("Approving")
-    const [hasAgreed, setHasAgreed] = useState<boolean>(localStorage.getItem("agreement") == "true" || false)
+    const [progressStatus, setProgressStatus] = useState<"Approving Fee" | "Approving NFT" | "Swapping">("Approving Fee")
+    const [hasAgreed,] = useState<boolean>(localStorage.getItem("agreement") == "true" || false)
 
     const {
         ownerNFTImage, ownerNFTName, ownerNFTAddress, ownerNFTID,
         selectedNFTImage, selectedNFTName, selectedNFTAddress, selectedNFTId,
         swapChainId, pair, router
     } = useSwapData()
+    const { setPreviousModal, setCurrentModal } = useModal()
 
     useEffect(function () {
         const { pair: pairAbi } = abis
@@ -57,7 +59,8 @@ export default function SwapDetails() {
         }
 
         if (!hasAgreed) {
-            // Show Agreement modal.
+            setPreviousModal("SWAP_DETAILS")
+            setCurrentModal("DISCLAIMER")
             return
         }
     }

@@ -19,7 +19,7 @@ export default function BottomNFTSelect() {
                 }
 
                 onClick={() => {
-                    if (ownerNFTID) setCurrentModal("SELECT_PAIR_NFT")
+                    if (ownerNFTID !== null) setCurrentModal("SELECT_PAIR_NFT")
                 }}
             >
                 <GradientDiv>

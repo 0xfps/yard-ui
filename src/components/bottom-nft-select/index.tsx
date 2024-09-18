@@ -2,10 +2,12 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import GradientDiv from "../gradient-div";
 import { useAccount } from "wagmi";
 import { useSwapData } from "@/store/swap-data-store";
+import { useModal } from "@/store/modal-store";
 
 export default function BottomNFTSelect() {
     const { isConnected } = useAccount()
     const { ownerNFTID, selectedNFTImage } = useSwapData()
+    const { setCurrentModal } = useModal()
 
     return (
         <div className="w-[100%] h-[145px] bg-[#192126] rounded-[12px] p-8 flex justify-between items-center">
@@ -15,6 +17,10 @@ export default function BottomNFTSelect() {
                     `w-[250px] h-[45px] rounded-[12px] text-xs font-sf-light ${!isConnected && "opacity-50 cursor-not-allowed"} 
                     ${(ownerNFTID === null) ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`
                 }
+
+                onClick={() => {
+                    if (ownerNFTID) setCurrentModal("SELECT_PAIR_NFT")
+                }}
             >
                 <GradientDiv>
                     <div className="w-[full] h-[100%] bg-night rounded-[12px] flex justify-around items-center">

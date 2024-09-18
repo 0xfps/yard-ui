@@ -56,7 +56,6 @@ export default function SelectUserNFTModal() {
             return ((token_id.toLowerCase().includes(e.target.value) || name.toLowerCase().includes(e.target.value)))
         })
 
-        console.log(e.target.value, filteredNFTs)
         setUsersOwnedNFTs(filteredNFTs)
     }
 
@@ -100,7 +99,7 @@ export default function SelectUserNFTModal() {
                             }
                             {
                                 ((usersOwnedNFTs !== null) && usersOwnedNFTs?.length > 0) &&
-                                <div className="w-[full] h-full">
+                                <div className="w-full h-full">
                                     {
                                         usersOwnedNFTs.map(function ({ contract_address, image_url, name, token_id }: SimpleHashNFTResponse, index: number) {
                                             return (

@@ -16,6 +16,8 @@ export const useSwapData = create<SwapData>()(
             swapChainId: null,
             router: "",
             pair: "",
+            hash: "",
+            failureReason: "lakdfjadfoia faoeir aqeoir epor ero qerpoq erpoqe rd foiq re rqeoir xqepor qeoir qeirx qer qeor qerx qeiruxer exru ep alkjdfyha fkjadhp fapdo fjhlk",
             setOwnerNFTAddress: (address: string) => set({ ownerNFTAddress: address }),
             setOwnerNFTId: (id: number) => set({ ownerNFTID: id }),
             setOwnerNFTImage: (img: string) => set({ ownerNFTImage: img }),
@@ -26,7 +28,9 @@ export const useSwapData = create<SwapData>()(
             setSelectedNFTName: (name: string) => set({ selectedNFTName: name }),
             setSwapChainId: (id: number | null) => set({ swapChainId: id }),
             setRouter: (router: string) => set({ router: router }),
-            setPair: (pair: string) => set({ pair: pair })
+            setPair: (pair: string) => set({ pair: pair }),
+            setFailureReason: (reason: string) => set({ failureReason: reason }),
+            setHash: (hash: string) => set({ hash: hash })
         }),
         {
             name: "swap-data-storage",

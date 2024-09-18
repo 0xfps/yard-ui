@@ -23,7 +23,7 @@ export default function WalletInfo() {
     const [copied, setCopied] = useState<boolean>(false)
     // Click function should not work when any of these divs are clicked on.
     // `undefined` for the copy icon. "" for the image.
-    const clickFunctionDontWork = ["y-wallet-info-button", "y-wallet-info-dropdown", undefined, ""]
+    const clickFunctionDontWork = ["y-wallet-info-button", "y-wallet-info-dropdown", undefined]
 
     /**
      * Change the name of the chain and the image of the chain if the user connects

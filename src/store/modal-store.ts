@@ -14,7 +14,9 @@ export const useModal = create<ModalData>()(
     persist(
         (set) => ({
             currentModal: "",
+            previousModal: "",
             setCurrentModal: (modal: Modals) => set({ currentModal: modal }),
+            setPreviousModal: (modal: Modals) => set({ previousModal: modal }),
             removeCurrentModal: () => set({ currentModal: "" })
         }),
         {

@@ -46,6 +46,14 @@
   visibility: visible;
 }
 
+#y-chain-dropdown[datatype="non-visible"],
+#y-connect-wallet-dropdown[datatype="non-visible"],
+#y-wallet-info-dropdown[datatype="non-visible"] {
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: visible;
+}
+
 /* Entire scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

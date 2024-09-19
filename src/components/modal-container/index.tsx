@@ -2,6 +2,7 @@ import { Props } from "@/interfaces/props";
 import { useModal } from "@/store/modal-store";
 import GradientDiv from "../gradient-div";
 import { useSwapData } from "@/store/swap-data-store";
+import "./styles.css"
 
 export default function ModalContainer({ children }: Props) {
     const { currentModal, setCurrentModal } = useModal()

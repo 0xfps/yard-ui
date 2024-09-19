@@ -80,17 +80,14 @@ export default function SelectUserReceivedNFTModal() {
 
         const chainName = getChainName(swapChainId as number)
         // @ts-ignore
-        const { router } = deployments[chainName]
-        const { router: routerAbi, pair: pairAbi } = abis
+        const { factory, router } = deployments[chainName]
+        const { factory: factoryAbi, pair: pairAbi } = abis
         const rpc = getChainRPC(chainName as string)
         const provider = new ethers.JsonRpcProvider(rpc)
-        const YardRouter = new ethers.Contract(router, routerAbi as any, provider)
-        let pair: string | undefined
-        try {
-            pair = await YardRouter.getPair(ownerNFTAddress, address)
-        } catch (e) { }
+        const YardFactory = new ethers.Contract(factory, factoryAbi as any, provider)
+        const pair = await YardFactory.getPair(ownerNFTAddress, address)
 
-        if (!pair) {
+        if (pair == ethers.ZeroAddress) {
             setPairExists(false)
             setLoading(false)
             return
@@ -197,8 +194,8 @@ export default function SelectUserReceivedNFTModal() {
                                     nftsInPair.map(function ({ image_url, name, token_id }: SimpleHashNFTResponse, index: number) {
                                         return (
                                             <div key={index} className="w-full h-fit m-auto my-2 rounded-md cursor-pointer flex items-center transition:ease-in-out delay-0 hover:bg-[#192126]" onClick={() => selectSwapNFT({ image_url, name, token_id })}>
-                                                <img src={image_url} alt={titleCase(name)} className="w-[50px] h-[50px] rounded-md" />
-                                                <p className="font-sf-medium text-sm ml-3">{name} #{token_id}</p>
+                                                <img src={image_url} alt={titleCase(name ?? "")} className="w-[50px] h-[50px] rounded-md" />
+                                                <p className="font-sf-medium text-sm ml-3">{name ?? ""} #{token_id}</p>
                                             </div>
                                         )
                                     })

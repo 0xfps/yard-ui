@@ -8,6 +8,7 @@ import { useEffect, useState } from "react"
 import { DEFAULT_CHAIN_ID } from "@/utils/constants"
 import { switchChain } from '@wagmi/core'
 import { wagmiConfig } from "../../../public/config/wagmi-config"
+import { isSupportedChain } from "@/utils/is-supported-chain"
 
 export default function AppNavBar() {
     const { chainId, isConnected } = useAccount()
@@ -17,7 +18,7 @@ export default function AppNavBar() {
         setUserIsConnected(isConnected)
         if (!isConnected) return
 
-        if (chainId != DEFAULT_CHAIN_ID) {
+        if (!isSupportedChain(chainId)) {
             (async function () {
                 try {
                     await switchChain(wagmiConfig, { chainId: DEFAULT_CHAIN_ID })

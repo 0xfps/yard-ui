@@ -17,7 +17,11 @@ export default function ModalContainer({ children }: Props) {
 
     function closeModal(e: any) {
         if (e.target.id == "modal-container") {
-            setCurrentModal("")
+            document.getElementById("modal-container")?.setAttribute("datatype", "non-visible")
+
+            document.getElementById("modal-container")?.addEventListener("transitionend", function () {
+                setCurrentModal("")
+            }, { once: true })
 
             if (currentModal == "TRANSACTION_SUCCESSFUL") {
                 clear()
@@ -27,7 +31,7 @@ export default function ModalContainer({ children }: Props) {
 
     return (
         currentModal != "" &&
-        <div className="w-full h-full p-10 flex justify-center items-center backdrop-blur-md absolute z-10" id="modal-container" data-aos="zoom-in" onClick={closeModal}>
+        <div className="w-full h-full p-10 flex justify-center items-center backdrop-blur-md absolute z-10" datatype="visible" id="modal-container" data-aos="zoom-in" onClick={closeModal}>
             <div id="modal-box">
                 <GradientDiv>
                     <div className="w-full h-full bg-background rounded-[12px] p-5 text-text font-sf-light">

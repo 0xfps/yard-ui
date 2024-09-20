@@ -47,6 +47,7 @@ export default function ConnectWalletButton() {
         const visibility: VisibilityTypes = dropdownDiv?.getAttribute("datatype") as VisibilityTypes
         if ((visibility == "visible") && (!clickFunctionDontWork.includes(e.target.offsetParent?.id))) {
             setIsVisible(false)
+            dropdownDiv?.setAttribute("datatype", "non-visible")
         }
     }
 

@@ -57,7 +57,9 @@ export default function SwapModal() {
                                                         : "Select NFT Pair"
                                                 }
                                             </button>
-                                            : <button className="w-full h-full rounded-[12px] bg-button text-2xl cursor-not-allowed">
+                                            : <button className="w-full h-full rounded-[12px] bg-button text-2xl cursor-pointer" onClick={() => {
+                                                document.getElementById("y-connect-wallet-dropdown")?.setAttribute("datatype", "visible")
+                                            }}>
                                                 Connect wallet
                                             </button>
                                     }

@@ -6,6 +6,7 @@ import SwapDetails from "../swap-details"
 import Agreement from "../agreement"
 import SuccessModal from "../success-modal"
 import FailureModal from "../failure-modal"
+import { AddLiquidityModal } from "../add-liquidity"
 
 export default function Modals() {
     const { currentModal } = useModal()
@@ -17,7 +18,8 @@ export default function Modals() {
             {currentModal == "SWAP_DETAILS" && <SwapDetails />}
             {currentModal == "DISCLAIMER" && <Agreement />}
             {currentModal == "TRANSACTION_SUCCESSFUL" && <SuccessModal />}
-            {currentModal == "TRANSACTION_FAILED" && <FailureModal/>}
+            {currentModal == "TRANSACTION_FAILED" && <FailureModal />}
+            {currentModal == "ADD_LIQUIDITY" && <AddLiquidityModal />}
         </ModalContainer>
     )
 }

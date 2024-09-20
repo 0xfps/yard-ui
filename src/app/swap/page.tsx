@@ -10,12 +10,13 @@ export default function Swap() {
     useEffect(function () {
         document.title = "Swap An NFT Instantly For Another Instantly - Yard Protocol"
     }, [])
+
     return (
         <>
             <AppContainer>
-                <AppNavBar />
+                <AppNavBar name={"swap"} />
                 <SwapHeader />
-                <SwapModal/>
+                <SwapModal />
             </AppContainer>
         </>
     )

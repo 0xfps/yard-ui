@@ -8,8 +8,10 @@ import { useEffect, useState } from "react"
 import { DEFAULT_CHAIN_ID } from "@/utils/constants"
 import { switchChain } from '@wagmi/core'
 import { wagmiConfig } from "../../../public/config/wagmi-config"
+import { isSupportedChain } from "@/utils/is-supported-chain"
+import { ActivePage } from "@/interfaces/active-page"
 
-export default function AppNavBar() {
+export default function AppNavBar({ name }: ActivePage) {
     const { chainId, isConnected } = useAccount()
     const [userIsConnected, setUserIsConnected] = useState<boolean>(false)
 
@@ -17,7 +19,7 @@ export default function AppNavBar() {
         setUserIsConnected(isConnected)
         if (!isConnected) return
 
-        if (chainId != DEFAULT_CHAIN_ID) {
+        if (!isSupportedChain(chainId)) {
             (async function () {
                 try {
                     await switchChain(wagmiConfig, { chainId: DEFAULT_CHAIN_ID })
@@ -31,8 +33,8 @@ export default function AppNavBar() {
             {/* Logo and links. */}
             <div className="w-[15%] p-1 h-full flex justify-around items-center font-sf-light text-sm">
                 <a href="/swap"><img src="/images/yard.png" alt="Yard Logo" className="w-[55px] h-[55px]" /></a>
-                <a href="/liquidity" className="hover:opacity-90">Provide liquidity</a>
-                <a href="/liquidity" className="y-active hover:opacity-90">Swap</a>
+                <a href="/liquidity" className={`${name == "liquidity" && "y-active"} hover:opacity-90`}>Provide liquidity</a>
+                <a href="/swap" className={`${name == "swap" && "y-active"} hover:opacity-90`}>Swap</a>
             </div>
             {/* Connect Wallet And Chain */}
             <div className="w-[20%] p-1 h-full flex items-center justify-between">

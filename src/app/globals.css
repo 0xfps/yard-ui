@@ -35,7 +35,7 @@
   opacity: 0;
   transform: translateY(-10px);
   visibility: hidden;
-  transition: opacity 300ms ease, transform 300ms ease;
+  transition: opacity 300ms ease, transform 300ms ease, visibility 300ms ease;
 }
 
 #y-chain-dropdown[datatype="visible"],
@@ -51,7 +51,7 @@
 #y-wallet-info-dropdown[datatype="non-visible"] {
   opacity: 0;
   transform: translateY(-10px);
-  visibility: visible;
+  visibility: hidden;
 }
 
 /* Entire scrollbar */

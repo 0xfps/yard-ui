@@ -1,0 +1,8 @@
+#modal-container {
+    transition: opacity 300ms ease, visibility 300ms ease;
+}
+
+#modal-container[datatype="non-visible"] {
+    opacity: 0;
+    visibility: hidden;
+}

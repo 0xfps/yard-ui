@@ -1,7 +1,10 @@
 export type Modals =
+    "ADD_LIQUIDITY" |
     "CLAIM_REWARDS" |
     "DISCLAIMER" |
     "SEARCH" |
+    "SELECT_NFT_FOR_LIQUIDITY" |
+    "SELECT_NFT_PAIR_FOR_LIQUIDITY" |
     "SELECT_PAIR_NFT" |
     "SELECT_USER_NFT" |
     "SWAP_DETAILS" |

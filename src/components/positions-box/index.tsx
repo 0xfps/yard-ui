@@ -11,6 +11,7 @@ import { getChainName } from "@/utils/get-chain-name"
 import { ethers } from "ethers"
 import { GoInbox } from "react-icons/go"
 import Spinner from "../spinner"
+import { IoWallet } from "react-icons/io5"
 
 export default function PositionsBox() {
     const { address, isConnected, chainId } = useAccount()
@@ -18,6 +19,7 @@ export default function PositionsBox() {
 
     const fetchPositions = useCallback(function () {
         if (!isConnected || !isSupportedChain(chainId)) return
+        setLpPairs(null)
         const chainName = getChainName(chainId)
         // @ts-ignore
         const { router } = deployments[chainName]
@@ -41,10 +43,22 @@ export default function PositionsBox() {
             <GradientDiv>
                 <div className="w-full h-full rounded-[12px] bg-background p-5">
                     {
-                        (lpPairs === null) &&
+                        (!isConnected) &&
                         <div className="w-full h-[260px]">
                             <div className="w-[40%] h-full m-auto text-center flex flex-col justify-center items-center">
-                                <Spinner/>
+                                <IoWallet className="text-5xl" />
+                                <span className="font-sf-light text-sm mt-12">
+                                    Connect your wallet to see your positions.
+                                </span>
+                            </div>
+                        </div>
+                    }
+
+                    {
+                        (isConnected && lpPairs === null) &&
+                        <div className="w-full h-[260px]">
+                            <div className="w-[40%] h-full m-auto text-center flex flex-col justify-center items-center">
+                                <Spinner />
                                 <span className="font-sf-light text-sm mt-12">
                                     Fetching liquidity positions...
                                 </span>
@@ -53,7 +67,7 @@ export default function PositionsBox() {
                     }
 
                     {
-                        (lpPairs !== null && lpPairs.length == 0) &&
+                        (isConnected && lpPairs !== null && lpPairs.length == 0) &&
                         <div className="w-full h-[260px]">
                             <div className="w-[40%] h-full m-auto text-center flex flex-col justify-center items-center">
                                 <GoInbox className="text-5xl" />

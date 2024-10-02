@@ -17,17 +17,17 @@ export type LiquidityData = {
     liquidityChainId: SupportedChains | null
 
     setNftAddress1: (address: string) => void
-    setNftImg1: (address: string) => void
-    setNftName1: (address: string) => void
+    setNftImg1: (img: string) => void
+    setNftName1: (name: string) => void
 
     setNftAddress2: (address: string) => void
-    setNftImg2: (address: string) => void
-    setNftName2: (address: string) => void
+    setNftImg2: (img: string) => void
+    setNftName2: (name: string) => void
 
     setPair: (pair: string | null) => void
     setLiquidityNFTAddress: (address: string) => void
-    setLiquidityNFTId: (address: string) => void
-    setLiquidityNFTName: (address: string) => void
+    setLiquidityNFTId: (id: string) => void
+    setLiquidityNFTName: (name: string) => void
 
     setLiquidityChainId: (id: SupportedChains | null) => void
     clear: () => void

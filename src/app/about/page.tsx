@@ -12,16 +12,13 @@ export default function About() {
     }, [])
 
     return (
-        <>
-            <div className="bg-background min-h-screen bg-hero bg-top bg-no-repeat">
-                {/* The NavBar is sticky and I want it to only remain sticy while this div is visible. */}
-                <div>
-                    <NavBarHome />
-                </div>
-                <AboutHero />
-                <Links />
-                <Footer />
+        <div className="bg-background min-h-screen bg-hero bg-top bg-no-repeat">
+            <div>
+                <NavBarHome />
             </div>
-        </>
+            <AboutHero />
+            <Links />
+            <Footer />
+        </div>
     );
 }

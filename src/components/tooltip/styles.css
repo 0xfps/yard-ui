@@ -6,7 +6,7 @@
 .tooltip-text {
   visibility: hidden;
   width: 250px;
-  background-color: #333;
+  background-color: rgba(6, 7, 10, 1);
   color: #fff;
   text-align: center;
   padding: 5px;
@@ -35,5 +35,5 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #333 transparent transparent transparent;
+  border-color: rgba(6, 7, 10, 1) transparent transparent transparent;
 }

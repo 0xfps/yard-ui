@@ -1,10 +1,10 @@
-import GradientDiv from "../gradient-div";
+"use client"
+
 import TopNFTSelect from "../top-nft-select";
-import { FaArrowAltCircleDown } from "react-icons/fa";
 import BottomNFTSelect from "../bottom-nft-select";
 import ToolTipDiv from "../tooltip";
 import { useSwapMode } from "@/store/swap-mode-store";
-import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
+import { FaCircleArrowDown, FaToggleOff, FaToggleOn } from "react-icons/fa6";
 import { useAccount } from "wagmi";
 import { useSwapData } from "@/store/swap-data-store";
 import { ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips";
@@ -18,6 +18,15 @@ export default function SwapModal() {
 
     function toggleArbitrarySwap() {
         setIsArbitrarySwap(!isArbitrarySwap)
+    }
+
+    function showWalletConnectDropDown() {
+        document.getElementById("y-connect-wallet-dropdown")?.setAttribute("datatype", "visible")
+    }
+
+    function showSwapDetailsModalIfIdsAreSet() {
+        if ((ownerNFTID === null || selectedNFTId === null)) return
+        setCurrentModal("SWAP_DETAILS")
     }
 
     return (
@@ -34,34 +43,30 @@ export default function SwapModal() {
                     </div>
                     <div className="w-full h-[60%] rounded-[12px] flex flex-col justify-between relative">
                         <TopNFTSelect />
-                        <FaArrowAltCircleDown className="absolute top-0 bottom-0 left-0 right-0 m-auto text-xl" />
+                        <FaCircleArrowDown className="absolute top-0 bottom-0 left-0 right-0 m-auto text-2xl text-button-light-rgb" />
                         <BottomNFTSelect />
                     </div>
 
-                    <div className="w-full flex justify-center items-center mt-6 transition ease-in-out delay-0 hover:opacity-80">
-                        <div className="w-full h-[70px] rounded-[12px] bg-button font-sf-light">
+                    <div className="w-full flex justify-center items-center mt-6">
+                        <div className="w-full h-[70px] rounded-[12px] text-2xl font-normal tracking-wide">
                             {
                                 isConnected
                                     ? <button
-                                        className={`w-full h-full rounded-[12px] bg-button text-2xl ${(ownerNFTID === null || selectedNFTId === null) && "cursor-not-allowed"}`}
-                                        onClick={() => {
-                                            if ((ownerNFTID === null || selectedNFTId === null)) return
-                                            setCurrentModal("SWAP_DETAILS")
-                                        }}
-                                    >
-                                        {
-                                            (ownerNFTID !== null && selectedNFTId !== null) ?
-                                                "Proceed to swap"
-                                                : "Select NFT Pair"
+                                        className={
+                                            `w-full h-full rounded-[12px] bg-button 
+                                            ${(ownerNFTID === null || selectedNFTId === null)
+                                                ? "cursor-not-allowed opacity-50"
+                                                : "transition ease-in-out delay-0 hover:opacity-80"
+                                            }`
                                         }
+                                        onClick={showSwapDetailsModalIfIdsAreSet}
+                                    >
+                                        Proceed
                                     </button>
-                                    : <button className="w-full h-full rounded-[12px] bg-button text-2xl cursor-pointer" onClick={() => {
-                                        document.getElementById("y-connect-wallet-dropdown")?.setAttribute("datatype", "visible")
-                                    }}>
+                                    : <button className="w-full h-full rounded-[12px] bg-button cursor-pointer transition ease-in-out delay-0 hover:opacity-80" onClick={showWalletConnectDropDown}>
                                         Connect wallet
                                     </button>
                             }
-
                         </div>
                     </div>
                 </div>

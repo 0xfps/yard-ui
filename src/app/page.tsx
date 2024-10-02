@@ -16,20 +16,17 @@ export default function Home() {
   }, [])
 
   return (
-    <>
-      <div className="bg-background min-h-screen bg-hero bg-top bg-no-repeat">
-        {/* The NavBar is sticky and I want it to only remain sticy while this div is visible. */}
-        <div>
-          <NavBarHome />
-          <Hero />
-          <HeroImage />
-          <HeroData />
-        </div>
-        <Chains />
-        <Features />
-        <Links />
-        <Footer/>
+    <div className="bg-background min-h-screen bg-hero bg-top bg-no-repeat">
+      <div>
+        <NavBarHome />
+        <Hero />
+        <HeroImage />
+        <HeroData />
       </div>
-    </>
+      <Chains />
+      <Features />
+      <Links />
+      <Footer />
+    </div>
   );
 }

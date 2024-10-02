@@ -16,15 +16,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <WagmiProvider config={wagmiConfig}>
-        <QueryClientProvider client={queryClient}>
-          <App>
-            <Modals />
-            {children}
-          </App>
-        </QueryClientProvider>
-      </WagmiProvider>
-    </>
+    <WagmiProvider config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        <App>
+          <Modals />
+          {children}
+        </App>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 }

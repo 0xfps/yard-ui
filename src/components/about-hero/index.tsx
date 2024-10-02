@@ -11,8 +11,8 @@ export default function AboutHero() {
             <div className="text-center text-[80px] font-sf-bold">
                 Meet The Builders
             </div>
-            <div className="text-[26px] mt-[40px] font-sf-light">
-                The amazing brains behind Yard 🦋.
+            <div className="text-[26px] mt-[40px] font-extralight">
+                The amazing people behind Yard 🦋.
             </div>
             <div className="w-[80%] m-auto flex justify-around mt-[200px]">
                 {/* fps */}
@@ -80,7 +80,7 @@ export default function AboutHero() {
                     </CardHeader>
                     <Divider />
                     <CardBody>
-                        <p>Smart contract developer and auditor, frontend engineer.</p>
+                        <p>Smart contract developer, auditor, frontend engineer.</p>
                     </CardBody>
                     <Divider />
                     <CardFooter>
@@ -94,7 +94,7 @@ export default function AboutHero() {
                 {/* Oma */}
                 <Card className="min-w-[400px] shadow-sm shadow-div-grad-start rounded-[12px] bg-background p-5">
                     <CardHeader className="flex gap-3">
-                        <a href="https://x.com/BilionaireRaven" target="_blank">
+                        <a href="https://www.behance.net/helenobika" target="_blank">
                             <Image
                                 alt="nextui logo"
                                 height={40}
@@ -119,7 +119,7 @@ export default function AboutHero() {
                     </CardHeader>
                     <Divider />
                     <CardBody>
-                        <p>UI/UX Engineer</p>
+                        <p>UI/UX Engineer.</p>
                     </CardBody>
                     <Divider />
                     <CardFooter>

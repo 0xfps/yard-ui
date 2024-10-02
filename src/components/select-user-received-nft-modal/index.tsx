@@ -1,3 +1,5 @@
+"use client"
+
 import { useSwapData } from "@/store/swap-data-store"
 import collections from "../../../public/json/collections.json"
 import deployments from "../../../public/json/deployments.json"
@@ -8,7 +10,6 @@ import { CollectionInterface } from "@/interfaces/collection"
 import { getChainRPC } from "@/utils/get-chain-rpc"
 import { ethers } from "ethers"
 import { FaSearch, FaToggleOn } from "react-icons/fa"
-import Spinner from "../spinner"
 import { FcCancel } from "react-icons/fc"
 import { getNFTsById } from "@/utils/fetchers/get-nfts-by-token-id"
 import { SupportedChains } from "@/types/supported-chains"
@@ -17,11 +18,13 @@ import { titleCase } from "@/utils/title-case"
 import { useModal } from "@/store/modal-store"
 import { useSwapMode } from "@/store/swap-mode-store"
 import ToolTipDiv from "../tooltip"
-import { ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips"
+import { ARBITRARY_SWAP_CONTENT, SECOND_ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips"
 import { FaToggleOff } from "react-icons/fa6"
 import Skeleton from "react-loading-skeleton"
+import { useAccount } from "wagmi"
 
 export default function SelectUserReceivedNFTModal() {
+    const { chainId } = useAccount()
     const {
         swapChainId, ownerNFTAddress, selectedNFTAddress,
         setSelectedNFTAddress, setSelectedNFTId, setSelectedNFTName,
@@ -142,6 +145,11 @@ export default function SelectUserReceivedNFTModal() {
                 <div className="w-full font-sf-bold text-xl">
                     Select NFT Collection
                 </div>
+                
+                <div className="w-full font-extralight text-xs mt-3 opacity-70">
+                    Choose an NFT collection on {titleCase(getChainName(chainId) ?? "")} to view NFTs in the pool.
+                </div>
+
                 <div className="w-full h-fit mt-4 py-2 flex justify-around flex-wrap">
                     {
                         nfts.map(function ({ name, image, address }: CollectionInterface, index: number) {
@@ -161,7 +169,7 @@ export default function SelectUserReceivedNFTModal() {
                     }
                 </div>
                 <div className="w-full h-[60px] flex justify-end items-center text-xs cursor-pointer font-sf-light">
-                    <ToolTipDiv trigger="Arbitrary swap" content={ARBITRARY_SWAP_CONTENT} />
+                    <ToolTipDiv trigger="Arbitrary swap" content={SECOND_ARBITRARY_SWAP_CONTENT} />
                     {
                         isArbitrarySwap
                             ? <FaToggleOn className="text-3xl cursor-pointer ml-3 text-button" onClick={toggleArbitrarySwap} />
@@ -169,7 +177,7 @@ export default function SelectUserReceivedNFTModal() {
                     }
                 </div>
                 <div className="w-full h-[60px] flex justify-center items-center relative">
-                    <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search or paste collection address" onChange={sortNFTs} />
+                    <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search by name, id, or paste collection address" onChange={sortNFTs} />
                     <FaSearch className="text-xs absolute right-0 mr-5" />
                 </div>
                 <div className="mt-4 w-full max-h-[320px] overflow-y-scroll">
@@ -184,7 +192,14 @@ export default function SelectUserReceivedNFTModal() {
                             (loading === false && pairExists === false) &&
                             <div className="w-full h-full flex flex-col justify-center items-center">
                                 <FcCancel className="text-2xl" />
-                                <span className="text-xs mt-2">Pair does not exist.</span>
+                                <span className="text-xs mt-2">Pool does not exist.</span>
+                            </div>
+                        }
+                        {
+                            (loading === false && pairExists && nftsInPair?.length == 0) &&
+                            <div className="w-full h-full flex flex-col justify-center items-center">
+                                <FcCancel className="text-2xl" />
+                                <span className="text-xs mt-2">Pool does not have enough reserves.</span>
                             </div>
                         }
                         {

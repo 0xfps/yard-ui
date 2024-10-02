@@ -14,7 +14,8 @@ const config: Config = {
         "hero": "url('/images/background.svg')",
         "feature1": "url('/images/nft-swap.svg')",
         "feature2": "url('/images/nft-imgs.svg')",
-        "swap-hero": "url('/images/swap-background.svg')"
+        "swap-hero": "url('/images/swap-background.svg')",
+        "not-found": "url('/images/not-found-bg.svg')"
       }
     },
     fontFamily: {
@@ -27,7 +28,7 @@ const config: Config = {
       "background-cover": "rgba(6, 7, 10, 0.5)",
       "button": "#0391FF",
       "button-light": "#5BB7FF",
-      "button-light-rgb": "rgba(91, 183, 255, 0.5)",
+      "button-light-rgb": "rgba(91, 183, 255, 0.1)",
       "night": "#242525",
       "night-light": "#585F65",
       "text": "#FFFFFF",

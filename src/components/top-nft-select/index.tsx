@@ -1,5 +1,6 @@
+"use client"
+
 import { RiArrowDropDownLine } from "react-icons/ri";
-import GradientDiv from "../gradient-div";
 import { useModal } from "@/store/modal-store";
 import { useAccount } from "wagmi";
 import { useSwapData } from "@/store/swap-data-store";
@@ -26,7 +27,7 @@ export default function TopNFTSelect() {
                         You send
                     </span>
                     <span className={`text-[25px] font-semibold text-text ${ownerNFTName == "" && "text-opacity-30"}`}>
-                        {ownerNFTName || "Yello Hat Apes Club"}
+                        {ownerNFTName || "Brown Apes Club"}
                     </span>
                     <span className={`text-lg font-thin text-text ${ownerNFTName == "" && "text-opacity-30"}`}>#{ownerNFTID === null ? 8888 : ownerNFTID}</span>
                 </div>

@@ -11,13 +11,14 @@ export default function NavBarHome() {
                 </a>
                 <div className="relative w-[30%] h-full bg-transparent rounded-[12px] flex flex-row justify-around items-center text-text font-sf-light backdrop-blur-lg">
                     <a href="/" className="rounded-[10px] w-fit p-[10px] hover:bg-night-light hover:bg-opacity-[.05] hover:backdrop-blur-lg text-lg">Home</a>
-                    <a href="/swap" className="rounded-[10px] w-fit p-[10px] hover:bg-night-light hover:bg-opacity-[.05] hover:backdrop-blur-lg text-lg">Swap</a>
-                    <a href="/about" className="rounded-[10px] w-fit p-[10px] hover:bg-night-light hover:bg-opacity-[.05] hover:backdrop-blur-lg text-lg">About</a>
+                    <a href="/swap" target="_blank" className="rounded-[10px] w-fit p-[10px] hover:bg-night-light hover:bg-opacity-[.05] hover:backdrop-blur-lg text-lg">Swap</a>
+                    <a href="https://yard-faucet.vercel.app/" target="_blank" className="rounded-[10px] w-fit p-[10px] hover:bg-night-light hover:bg-opacity-[.05] hover:backdrop-blur-lg text-lg">Faucet</a>
+                    <a href="/about" target="_blank" className="rounded-[10px] w-fit p-[10px] hover:bg-night-light hover:bg-opacity-[.05] hover:backdrop-blur-lg text-lg">About</a>
                 </div>
                 <a href="/swap" target="_blank">
                     <GradientButton>
                         <div className="bg-button w-[160px] h-[48px] text-text rounded-[12px] text-lg font-sf-light hover:opacity-[.90] flex flex-row justify-center items-center">
-                            Launch
+                            Launch App
                         </div>
                     </GradientButton>
                 </a>

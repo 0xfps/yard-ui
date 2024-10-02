@@ -1,9 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import GradientDiv from "../gradient-div"
 import { VisibilityTypes } from "@/types/visibility"
-import { MdKeyboardArrowRight } from "react-icons/md"
 import { connectors } from "../../../public/config/wagmi-connectors"
 import { connect } from '@wagmi/core'
 import { wagmiConfig } from "../../../public/config/wagmi-config"
@@ -74,28 +72,24 @@ export default function ConnectWalletButton() {
                             <div className="w-[90%] h-full rounded-full flex items-center">
                                 <img src="/images/metamask.png" alt="Arbitrum Image" className="w-[25px] h-[25px] rounded-[6px]" /> <span className="ml-3">Metamask</span>
                             </div>
-                            <MdKeyboardArrowRight className="text-2xl" />
                         </div>
 
                         <div className="flex items-center w-[95%] border-night-light border m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => connectWallet("rabby")}>
                             <div className="w-[90%] h-full rounded-full flex items-center">
                                 <img src="/images/rabby.png" alt="Arbitrum Image" className="w-[25px] h-[25px] rounded-[6px]" /> <span className="ml-3">Rabby</span>
                             </div>
-                            <MdKeyboardArrowRight className="text-2xl" />
                         </div>
 
                         <div className="flex items-center w-[95%] border-night-light border m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => connectWallet("coinbase")}>
                             <div className="w-[90%] h-full rounded-full flex items-center">
                                 <img src="/images/coinbase.webp" alt="Arbitrum Image" className="w-[25px] h-[25px] rounded-[6px]" /> <span className="ml-3">Coinbase</span>
                             </div>
-                            <MdKeyboardArrowRight className="text-2xl" />
                         </div>
 
                         <div className="flex items-center w-[95%] border-night-light border m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => connectWallet("walletConnect")}>
                             <div className="w-[90%] h-full rounded-full flex items-center">
                                 <img src="/images/wallet-connect.jpeg" alt="Arbitrum Image" className="w-[25px] h-[25px] rounded-[6px]" /> <span className="ml-3">Wallet Connect</span>
                             </div>
-                            <MdKeyboardArrowRight className="text-2xl" />
                         </div>
                     </div>
                 </div>

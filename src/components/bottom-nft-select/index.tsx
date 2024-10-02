@@ -1,5 +1,6 @@
+"use client"
+
 import { RiArrowDropDownLine } from "react-icons/ri";
-import GradientDiv from "../gradient-div";
 import { useAccount } from "wagmi";
 import { useSwapData } from "@/store/swap-data-store";
 import { useModal } from "@/store/modal-store";

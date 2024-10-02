@@ -14,7 +14,8 @@ const config: Config = {
         "hero": "url('/images/background.svg')",
         "feature1": "url('/images/nft-swap.svg')",
         "feature2": "url('/images/nft-imgs.svg')",
-        "swap-hero": "url('/images/swap-background.svg')"
+        "swap-hero": "url('/images/swap-background.svg')",
+        "not-found": "url('/images/not-found-bg.svg')"
       }
     },
     fontFamily: {

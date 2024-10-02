@@ -9,7 +9,7 @@ export default function PositionsTitle() {
     const { isConnected } = useAccount()
     const {setCurrentModal} = useModal()
 
-    function startLiquidityAddition() {
+    function showAddLiquidityModal() {
         if (!isConnected) return
         setCurrentModal("ADD_LIQUIDITY")
     }
@@ -19,7 +19,8 @@ export default function PositionsTitle() {
             <span className="font-sf-medium text-2xl">
                 Positions
             </span>
-            <div className="w-[110px] h-[90%] rounded-[12px] text-xs cursor-pointer" onClick={startLiquidityAddition}>
+            {/* @note - Create pair can't be added now because of the possibility of creating already existent pairs. */}
+            <div className="w-[110px] h-[90%] rounded-[12px] text-xs cursor-pointer" onClick={showAddLiquidityModal}>
                 <GradientDiv>
                     <div className="w-full h-full rounded-[12px] bg-button flex justify-between items-center p-2">
                         <FaPlus className="text-xs" /> <span>Add Liquidity</span>

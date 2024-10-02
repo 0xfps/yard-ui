@@ -38,39 +38,6 @@ export default function Features() {
                     </GradientDiv>
                 </div>
             </div>
-            {/* Second feature. */}
-            <div className="flex justify-center mt-[90px]">
-                {/* About the first feature. */}
-                <div className="w-[50%] text-text">
-                    <div className="w-[70%] mt-20">
-                        <div className="font-sf-bold text-[32px]">Power Up Your Portfolio with Liquidity</div>
-                        <div className="mt-6 font-sf-light text-[20px]">
-                            Become a liquidity provider and earn rewards while helping others trade NFTs. By adding your NFTs to our liquidity pools, you contribute to a vibrant ecosystem and unlock exciting opportunities.
-                        </div>
-                        <a href="/liquidity" target="_blank">
-                            <div className="h-[56px] w-[240px] bg-night rounded-[12px] mt-10 transition ease-in-out delay-150 hover:scale-95">
-                                <GradientDiv>
-                                    <div
-                                        className="flex h-[100%] w-[100%] justify-center items-center rounded-[12px] bg-night"
-                                    >
-                                        Provide liquidity
-                                    </div>
-                                </GradientDiv>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                {/* Image of the first feature. */}
-                <div className="w-[50%]">
-                    <GradientDiv>
-                        <div
-                            className="flex h-[500px] w-[100%] justify-center items-center rounded-[12px] shadow-lg shadow-div-grad-start bg-background"
-                        >
-                            <img src="/images/nft-imgs.svg" alt="" />
-                        </div>
-                    </GradientDiv>
-                </div>
-            </div>
         </div>
     )
 }

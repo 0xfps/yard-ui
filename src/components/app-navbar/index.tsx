@@ -31,10 +31,9 @@ export default function AppNavBar({ name }: ActivePage) {
     return (
         <div className="h-[80px] w-full p-2 flex justify-between items-center">
             {/* Logo and links. */}
-            <div className="w-[15%] p-1 h-full flex justify-around items-center font-sf-light text-sm">
+            <div className="w-[15%] p-1 h-full flex items-center font-sf-light text-sm">
                 <a href="/swap"><img src="/images/yard.png" alt="Yard Logo" className="w-[55px] h-[55px]" /></a>
-                <a href="/liquidity" className={`${name == "liquidity" && "y-active"} hover:opacity-90`}>Provide liquidity</a>
-                <a href="/swap" className={`${name == "swap" && "y-active"} hover:opacity-90`}>Swap</a>
+                <a href="/swap" className={`${name == "swap" && "y-active"} hover:opacity-90 ml-10`}>Swap</a>
             </div>
             {/* Connect Wallet And Chain */}
             <div className="w-[20%] p-1 h-full flex items-center justify-between">

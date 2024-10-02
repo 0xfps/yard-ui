@@ -22,12 +22,10 @@ export default function BottomNFTSelect() {
                     if (ownerNFTID !== null) setCurrentModal("SELECT_PAIR_NFT")
                 }}
             >
-                <GradientDiv>
-                    <div className="w-[full] h-[100%] bg-night rounded-[12px] flex justify-around items-center">
-                        <span>Select NFT to receive</span>
-                        <RiArrowDropDownLine className="text-xl" />
-                    </div>
-                </GradientDiv>
+                <div className="w-[full] h-[100%] bg-night rounded-[12px] flex justify-around items-center">
+                    <span>Select NFT to receive</span>
+                    <RiArrowDropDownLine className="text-xl" />
+                </div>
             </div>
         </div>
     )

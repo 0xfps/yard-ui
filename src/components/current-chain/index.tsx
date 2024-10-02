@@ -72,49 +72,45 @@ export default function CurrentChain() {
 
     return (
         <>
-            <div className="w-[157px] h-[48px] rounded-[12px] relative" id="y-chain-button">
-                <GradientDiv>
-                    <button className="w-full h-full flex items-center font-sf-light justify-center bg-night rounded-[12px]" onClick={showDropdown}>
-                        <img src={chainImg} alt="Default Chain Image" className="w-[20px] h-[20px]" />
-                        <span className="ml-2">{titleCase(chainName) == "Bsc" ? "BSC" : titleCase(chainName)}</span>
-                        <span>
-                            {
-                                !isVisible ?
-                                    <RiArrowDropDownLine className="text-3xl" />
-                                    :
-                                    <RiArrowDropUpLine className="text-3xl" />
-                            }
-                        </span>
-                    </button>
-                </GradientDiv>
+            <div className="w-fit h-[48px] rounded-[12px] relative" id="y-chain-button">
+                <button className="w-full h-full flex items-center font-sf-light justify-center bg-background rounded-[12px] p-3" onClick={showDropdown}>
+                    <img src={chainImg} alt="Default Chain Image" className="w-[20px] h-[20px]" />
+                    {/* <span className="ml-2">{titleCase(chainName) == "Bsc" ? "BSC" : titleCase(chainName)}</span> */}
+                    <span>
+                        {
+                            !isVisible ?
+                                <RiArrowDropDownLine className="text-3xl" />
+                                :
+                                <RiArrowDropUpLine className="text-3xl" />
+                        }
+                    </span>
+                </button>
                 <div className="w-[200px] h-[300px] mt-2 rounded-[12px] absolute right-0" datatype="non-visible" id="y-chain-dropdown">
-                    <GradientDiv>
-                        <div className="w-full h-full p-3 font-sf-light bg-background rounded-[12px] flex flex-col justify-around">
-                            <div className="text-left w-[95%] m-auto font-sf-medium text-[20px]">
-                                Select Chain
-                            </div>
-
-                            <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("arbitrum"))}>
-                                <img src="/images/arbitrum.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Arbitrum</span>
-                            </div>
-
-                            <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("base"))}>
-                                <img src="/images/base.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Base</span>
-                            </div>
-
-                            <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("bsc"))}>
-                                <img src="/images/bsc.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">BSC</span>
-                            </div>
-
-                            <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("scroll"))}>
-                                <img src="/images/scroll.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Scroll</span>
-                            </div>
-
-                            <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("sepolia"))}>
-                                <img src="/images/sepolia.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Sepolia</span>
-                            </div>
+                    <div className="w-full h-full p-3 font-sf-light bg-background rounded-[12px] flex flex-col justify-around">
+                        <div className="text-left w-[95%] m-auto font-sf-medium text-[20px]">
+                            Select Chain
                         </div>
-                    </GradientDiv>
+
+                        <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("arbitrum"))}>
+                            <img src="/images/arbitrum.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Arbitrum</span>
+                        </div>
+
+                        <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("base"))}>
+                            <img src="/images/base.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Base</span>
+                        </div>
+
+                        <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("bsc"))}>
+                            <img src="/images/bsc.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">BSC</span>
+                        </div>
+
+                        <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("scroll"))}>
+                            <img src="/images/scroll.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Scroll</span>
+                        </div>
+
+                        <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("sepolia"))}>
+                            <img src="/images/sepolia.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Sepolia</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

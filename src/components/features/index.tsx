@@ -27,15 +27,12 @@ export default function Features() {
                         </a>
                     </div>
                 </div>
-                {/* Image of the first feature. */}
                 <div className="w-[50%]">
-                    <GradientDiv>
-                        <div
-                            className="flex h-[500px] w-[100%] justify-center items-center rounded-[12px] shadow-lg shadow-div-grad-start bg-background"
-                        >
-                            <img src="/images/nft-swap.svg" alt="" />
-                        </div>
-                    </GradientDiv>
+                    <div
+                        className="flex h-[500px] w-[100%] justify-center items-center rounded-[12px] shadow-sm shadow-div-grad-start bg-background"
+                    >
+                        <img src="/images/nft-swap.svg" alt="" className="mb-10" />
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,3 +1,5 @@
+"use client"
+
 import { Props } from "@/interfaces/props";
 
 export default function AppContainer({ children }: Props) {

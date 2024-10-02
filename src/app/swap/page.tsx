@@ -12,12 +12,10 @@ export default function Swap() {
     }, [])
 
     return (
-        <>
-            <AppContainer>
-                <AppNavBar name={"swap"} />
-                <SwapHeader />
-                <SwapModal />
-            </AppContainer>
-        </>
+        <AppContainer>
+            <AppNavBar name={"swap"} />
+            <SwapHeader />
+            <SwapModal />
+        </AppContainer>
     )
 }

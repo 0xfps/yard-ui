@@ -1,7 +1,6 @@
 "use client"
 
 import { useAccount } from "wagmi"
-import GradientDiv from "../gradient-div"
 import { useEffect, useState } from "react"
 import { getChainName } from "@/utils/get-chain-name"
 import { getChainImage } from "@/utils/get-chain-image"
@@ -83,7 +82,6 @@ export default function WalletInfo() {
     function click(e: any) {
         const dropdownDiv = document.getElementById("y-wallet-info-dropdown")
         const visibility: VisibilityTypes = dropdownDiv?.getAttribute("datatype") as VisibilityTypes
-        console.log({ clicked: e.target.offsetParent?.id })
         if ((visibility == "visible") && (!clickFunctionDontWork.includes(e.target.offsetParent?.id))) {
             setIsVisible(false)
         }

@@ -20,22 +20,23 @@ export default function AppNavBar({ name }: ActivePage) {
         if (!isConnected) return
 
         if (!isSupportedChain(chainId)) {
-            (async function () {
-                try {
-                    await switchChain(wagmiConfig, { chainId: DEFAULT_CHAIN_ID })
-                } catch (e) { }
-            })()
+            switchToDefaultChain()
         }
     }, [isConnected])
 
+    async function switchToDefaultChain() {
+        try {
+            await switchChain(wagmiConfig, { chainId: DEFAULT_CHAIN_ID })
+        } catch (e) { }
+    }
+
     return (
         <div className="h-[80px] w-full p-2 flex justify-between items-center">
-            {/* Logo and links. */}
-            <div className="w-[15%] p-1 h-full flex items-center font-sf-light text-sm">
+            <div className="w-[15%] p-1 h-full flex items-center justify-around font-sf-light text-sm">
                 <a href="/swap"><img src="/images/yard.png" alt="Yard Logo" className="w-[55px] h-[55px]" /></a>
-                <a href="/swap" className={`${name == "swap" && "y-active"} hover:opacity-90 ml-10`}>Swap</a>
+                <a href="/swap" className={`${name == "swap" && "y-active"} hover:opacity-90`}>Swap</a>
+                <a href="https://yard-faucet.vercel.app/" target="_blank" className="hover:opacity-90">Faucet</a>
             </div>
-            {/* Connect Wallet And Chain */}
             <div className="w-[15%] p-1 h-full flex items-center justify-between">
                 <CurrentChain />
                 {(!userIsConnected || !isConnected) ? <ConnectWalletButton /> : <WalletInfo />}

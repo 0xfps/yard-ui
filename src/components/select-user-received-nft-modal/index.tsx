@@ -21,8 +21,10 @@ import ToolTipDiv from "../tooltip"
 import { ARBITRARY_SWAP_CONTENT, SECOND_ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips"
 import { FaToggleOff } from "react-icons/fa6"
 import Skeleton from "react-loading-skeleton"
+import { useAccount } from "wagmi"
 
 export default function SelectUserReceivedNFTModal() {
+    const { chainId } = useAccount()
     const {
         swapChainId, ownerNFTAddress, selectedNFTAddress,
         setSelectedNFTAddress, setSelectedNFTId, setSelectedNFTName,
@@ -143,6 +145,11 @@ export default function SelectUserReceivedNFTModal() {
                 <div className="w-full font-sf-bold text-xl">
                     Select NFT Collection
                 </div>
+                
+                <div className="w-full font-extralight text-xs mt-3 opacity-70">
+                    Choose an NFT collection on {titleCase(getChainName(chainId) ?? "")} to view NFTs in the pool.
+                </div>
+
                 <div className="w-full h-fit mt-4 py-2 flex justify-around flex-wrap">
                     {
                         nfts.map(function ({ name, image, address }: CollectionInterface, index: number) {
@@ -185,7 +192,14 @@ export default function SelectUserReceivedNFTModal() {
                             (loading === false && pairExists === false) &&
                             <div className="w-full h-full flex flex-col justify-center items-center">
                                 <FcCancel className="text-2xl" />
-                                <span className="text-xs mt-2">Pair does not exist.</span>
+                                <span className="text-xs mt-2">Pool does not exist.</span>
+                            </div>
+                        }
+                        {
+                            (loading === false && pairExists && nftsInPair?.length == 0) &&
+                            <div className="w-full h-full flex flex-col justify-center items-center">
+                                <FcCancel className="text-2xl" />
+                                <span className="text-xs mt-2">Pool does not have enough reserves.</span>
                             </div>
                         }
                         {

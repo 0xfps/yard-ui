@@ -43,7 +43,7 @@ export default function SwapModal() {
                     </div>
                     <div className="w-full h-[60%] rounded-[12px] flex flex-col justify-between relative">
                         <TopNFTSelect />
-                        <FaCircleArrowDown className="absolute top-0 bottom-0 left-0 right-0 m-auto text-2xl text-button-light-rgb" />
+                        <FaCircleArrowDown className="absolute top-0 bottom-0 left-0 right-0 m-auto text-2xl text-button opacity-50" />
                         <BottomNFTSelect />
                     </div>
 

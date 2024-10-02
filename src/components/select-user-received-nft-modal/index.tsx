@@ -1,3 +1,5 @@
+"use client"
+
 import { useSwapData } from "@/store/swap-data-store"
 import collections from "../../../public/json/collections.json"
 import deployments from "../../../public/json/deployments.json"
@@ -8,7 +10,6 @@ import { CollectionInterface } from "@/interfaces/collection"
 import { getChainRPC } from "@/utils/get-chain-rpc"
 import { ethers } from "ethers"
 import { FaSearch, FaToggleOn } from "react-icons/fa"
-import Spinner from "../spinner"
 import { FcCancel } from "react-icons/fc"
 import { getNFTsById } from "@/utils/fetchers/get-nfts-by-token-id"
 import { SupportedChains } from "@/types/supported-chains"
@@ -17,7 +18,7 @@ import { titleCase } from "@/utils/title-case"
 import { useModal } from "@/store/modal-store"
 import { useSwapMode } from "@/store/swap-mode-store"
 import ToolTipDiv from "../tooltip"
-import { ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips"
+import { ARBITRARY_SWAP_CONTENT, SECOND_ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips"
 import { FaToggleOff } from "react-icons/fa6"
 import Skeleton from "react-loading-skeleton"
 
@@ -161,7 +162,7 @@ export default function SelectUserReceivedNFTModal() {
                     }
                 </div>
                 <div className="w-full h-[60px] flex justify-end items-center text-xs cursor-pointer font-sf-light">
-                    <ToolTipDiv trigger="Arbitrary swap" content={ARBITRARY_SWAP_CONTENT} />
+                    <ToolTipDiv trigger="Arbitrary swap" content={SECOND_ARBITRARY_SWAP_CONTENT} />
                     {
                         isArbitrarySwap
                             ? <FaToggleOn className="text-3xl cursor-pointer ml-3 text-button" onClick={toggleArbitrarySwap} />
@@ -169,7 +170,7 @@ export default function SelectUserReceivedNFTModal() {
                     }
                 </div>
                 <div className="w-full h-[60px] flex justify-center items-center relative">
-                    <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search or paste collection address" onChange={sortNFTs} />
+                    <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search by name, id, or paste collection address" onChange={sortNFTs} />
                     <FaSearch className="text-xs absolute right-0 mr-5" />
                 </div>
                 <div className="mt-4 w-full max-h-[320px] overflow-y-scroll">

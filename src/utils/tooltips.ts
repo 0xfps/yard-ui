@@ -1,5 +1,11 @@
 export const ARBITRARY_SWAP_CONTENT = `
-        Normal swaps allow you to select which NFTs to choose from the pool.
-        Arbitrary swaps give allows you to not care about what comes from the pool,
-        but instead, swap for a random NFT that exists in the pool.
-    `
+    Normal swaps provide the option to select specific NFTs from the pool.
+    In contrast, Arbitrary swaps randomly assign an NFT from the available pool,
+    determined by the system.
+`
+
+export const SECOND_ARBITRARY_SWAP_CONTENT = `
+    Toggling this on will automatically select an NFT available in the pool for you,
+    as determined by the system for you to receive.
+    Likewise, toggling this off gives you the liberty to choose what you would receive.
+`

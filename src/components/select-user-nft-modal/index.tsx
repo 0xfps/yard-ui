@@ -1,3 +1,5 @@
+"use client"
+
 import { useAccount } from "wagmi"
 import { useEffect, useState } from "react"
 import { isSupportedChain } from "@/utils/is-supported-chain"
@@ -6,7 +8,6 @@ import { getNFTsOwnedByAddress } from "@/utils/fetchers/get-nfts-owned-by-addres
 import { SimpleHashNFTResponse } from "@/interfaces/simple-hash-nft-response"
 import UserNotOnSupportedChainForSwap from "../user-not-on-supported-chain-for-swap"
 import { FaBoxOpen, FaSearch } from "react-icons/fa"
-import Spinner from "../spinner"
 import { getChainName } from "@/utils/get-chain-name"
 import { titleCase } from "@/utils/title-case"
 import { useSwapData } from "@/store/swap-data-store"
@@ -33,20 +34,22 @@ export default function SelectUserNFTModal() {
         if (!chainId) return
         if (!isOnSupportedChain || !isConnected || !address) return
 
-        (async function () {
-            setUsersOwnedNFTs(null)
-            const nfts = await getNFTsOwnedByAddress(address, chainId as SupportedChains)
-            if (!nfts) {
-                setUsersOwnedNFTs([])
-                return
-            }
-
-            setUsersOwnedNFTs(nfts)
-            setAllNFTs(nfts)
-        })()
+        getAndSetUsersOwnedNFTs()
     }, [chainId])
 
-    function sortNFTs(e: any) {
+    async function getAndSetUsersOwnedNFTs() {
+        setUsersOwnedNFTs(null)
+        const nfts = await getNFTsOwnedByAddress(address as any, chainId as SupportedChains)
+        if (!nfts) {
+            setUsersOwnedNFTs([])
+            return
+        }
+
+        setUsersOwnedNFTs(nfts)
+        setAllNFTs(nfts)
+    }
+
+    function sortAndSetNFTs(e: any) {
         if (!allNFTs || allNFTs?.length == 0) return
         if (e.target.value.replace(/ /g, "") == "") {
             setUsersOwnedNFTs(allNFTs)
@@ -70,7 +73,7 @@ export default function SelectUserNFTModal() {
     }
 
     return (
-        <div className="w-[350px] h-[400px] p-5">
+        <div className="w-[350px] h-[460px] p-5">
             {
                 !isOnSupportedChain
                     ? <UserNotOnSupportedChainForSwap />
@@ -79,15 +82,19 @@ export default function SelectUserNFTModal() {
                             Select NFT
                         </div>
 
+                        <div className="w-full font-extralight text-xs mt-3 opacity-70">
+                            Choose an NFT from your owned collections on {titleCase(getChainName(chainId) ?? "")}.
+                        </div>
+
                         <div className="mt-3 w-full h-[13%] flex justify-center items-center relative">
-                            <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search" onChange={sortNFTs} />
+                            <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search by name or id" onChange={sortAndSetNFTs} />
                             <FaSearch className="text-xs absolute right-0 mr-5" />
                         </div>
-                        <div className="w-full h-[70%] mt-5 overflow-y-scroll">
+                        <div className="w-full h-[70%] mt-4 overflow-y-scroll">
                             {
                                 usersOwnedNFTs === null &&
                                 <div className="w-full h-[full]">
-                                    <Skeleton baseColor="#192126" highlightColor="#5a5d5e" count={5} height={40} className="mt-2"/>
+                                    <Skeleton baseColor="#192126" highlightColor="#5a5d5e" count={5} height={40} className="mt-2" />
                                 </div>
                             }
                             {

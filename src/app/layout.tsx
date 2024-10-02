@@ -6,6 +6,7 @@ import "./globals.css";
 import { wagmiConfig } from "../../public/config/wagmi-config";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Modals from "@/components/modals";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const queryClient = new QueryClient()
 

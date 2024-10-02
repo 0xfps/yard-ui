@@ -1,7 +1,6 @@
 import { useModal } from "@/store/modal-store"
 import { useSwapData } from "@/store/swap-data-store"
 import { LuRefreshCw } from "react-icons/lu"
-import GradientDiv from "../gradient-div"
 import { getUrlForTransaction } from "@/utils/get-url"
 import { SupportedChains } from "@/types/supported-chains"
 
@@ -43,16 +42,13 @@ export default function SuccessModal() {
                         </div>
                     </div>
                 </div>
-                <hr className="mt-7" />
-                <div className="mt-2">
+                <div className="mt-7 text-center">
                     <a href={getUrlForTransaction(swapChainId as SupportedChains, hash)} className="text-xs hover:opacity-80" target="_blank">View transaction</a>
                 </div>
-                <div className="w-full h-[60px] bg-button mt-3 rounded-[12px] hover:opacity-85" onClick={() => { setCurrentModal(""); clear() }}>
-                    <GradientDiv>
-                        <div className="w-full h-full bg-button rounded-[12px] text-center flex justify-center items-center font-sf-medium text-2xl cursor-pointer">
-                            Close
-                        </div>
-                    </GradientDiv>
+                <div className="w-full h-[60px] bg-button mt-5 rounded-[12px] hover:opacity-85" onClick={() => { setCurrentModal(""); clear() }}>
+                    <div className="w-full h-full bg-button rounded-[12px] text-center flex justify-center items-center font-sf-medium text-2xl cursor-pointer">
+                        Close
+                    </div>
                 </div>
             </div>
         </div>

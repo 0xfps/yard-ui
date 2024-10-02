@@ -25,7 +25,7 @@ export default function SwapDetails() {
     const { address, chainId } = useAccount()
     const [fee, setFee] = useState<number | null>(null)
     const [inProgress, setInProgress] = useState<boolean>(false)
-    const [progressStatus, setProgressStatus] = useState<"Approving Fee" | "Approving NFT" | "Swapping">("Approving Fee")
+    const [progressStatus, setProgressStatus] = useState<string>("")
     const [hasAgreed,] = useState<boolean>(localStorage.getItem("agreement") == "true" || false)
     const [balance, setBalance] = useState<number>(0)
     const [canSwap, setCanSwap] = useState<boolean>(false)
@@ -99,7 +99,7 @@ export default function SwapDetails() {
     }
 
     async function feeApproval(): Promise<boolean> {
-        setProgressStatus("Approving Fee")
+        setProgressStatus(`Approving ${fee} yUSDC`)
         const chainName = getChainName(swapChainId as number)
         // @ts-ignore
         const { feeToken, router } = deployments[chainName]
@@ -117,14 +117,8 @@ export default function SwapDetails() {
 
             if (hash) {
                 const transactionReceipt = await waitForTransactionReceipt(wagmiConfig, { hash })
-                if (transactionReceipt) {
-                    return true
-                } else {
-                    return false
-                }
-            } else {
-                return false
-            }
+                return transactionReceipt ? true : false
+            } else return false
         } catch {
             return false
         }
@@ -150,14 +144,8 @@ export default function SwapDetails() {
 
             if (hash) {
                 const transactionReceipt = await waitForTransactionReceipt(wagmiConfig, { hash })
-                if (transactionReceipt) {
-                    return true
-                } else {
-                    return false
-                }
-            } else {
-                return false
-            }
+                return transactionReceipt ? true : false
+            } else return false
         } catch {
             return false
         }
@@ -185,15 +173,9 @@ export default function SwapDetails() {
 
             if (hash) {
                 const transactionReceipt = await waitForTransactionReceipt(wagmiConfig, { hash })
-                if (transactionReceipt) {
-                    setHash(hash)
-                    return true
-                } else {
-                    return false
-                }
-            } else {
-                return false
-            }
+                transactionReceipt && setHash(hash)
+                return transactionReceipt ? true : false
+            } else return false
         } catch {
             return false
         }
@@ -225,56 +207,52 @@ export default function SwapDetails() {
                             <p className="text-[13px] font-sf-medium">#{selectedNFTId}</p>
                         </div>
                     </div>
-                    <div className="w-full h-[150px] bg-text mt-5 rounded-[12px]">
-                        <GradientDiv>
-                            <div className="w-full h-full bg-background rounded-[12px] relative flex justify-center items-center">
-                                {/* Blur. */}
-                                <div className="w-[100px] h-[100px] bg-button absolute left-[17%] blur-3xl"></div>
-                                <div className="w-[60%] h-[90%] p-1 flex flex-col justify-around">
-                                    <div className="w-full h-[50%] flex justify-center items-center">
-                                        <div className="align-middle flex justify-center items-center">
-                                            <span className="font-sf-light">Swap fee:</span>
-                                            <span className="ml-1 text-5xl font-sf-bold">{fee === null ? <Spinner /> : fee}</span>
-                                            <img src="/images/usdc.svg" alt="USDC" className="inline w-[15px] h-[15px] ml-2" />
-                                            <span className="ml-1 text-md font-sf-medium">
-                                                yUSDC
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="w-full h-[15%] text-[11px] flex justify-start ps-8 items-center">
-                                        <span className="cursor-pointer">Balance: <span>{balance} <img src="/images/usdc.svg" alt="yUSDC" className="w-[10px] h-[10px] inline mb-[2px]" /> yUSDC</span> <img src={getChainImage(swapChainId as number)} alt={getChainName(swapChainId as number)} className="w-[10px] h-[10px] inline mb-[2px]" /></span>
-                                    </div>
-                                    <div className="w-full h-[15%] text-[11px] flex justify-start ps-8 items-center">
-                                        <a href={getUrlForAddress(swapChainId as SupportedChains, pair)} target="_blank"><span className="cursor-pointer">Pair: <span>{truncateAddress(pair, 10)}</span> <img src={getChainImage(swapChainId as number)} alt={getChainName(swapChainId as number)} className="w-[10px] h-[10px] inline mb-[2px]" /></span></a>
-                                    </div>
-                                    <div className="w-full h-[15%] text-[11px] flex justify-start ps-8 items-center">
-                                        <a href={getUrlForAddress(swapChainId as SupportedChains, router)} target="_blank"><span className="cursor-pointer">Router: <span>{truncateAddress(router, 10)}</span> <img src={getChainImage(swapChainId as number)} alt={getChainName(swapChainId as number)} className="w-[10px] h-[10px] inline mb-[2px]" /></span></a>
+                    <div className="w-full h-[150px] mt-5 rounded-[12px]">
+                        <div className="w-full h-full bg-background-cover rounded-[12px] relative flex justify-center items-center">
+                            {/* Blur. */}
+                            <div className="w-[100px] h-[100px] bg-button absolute left-[17%] blur-3xl"></div>
+                            <div className="w-[60%] h-[90%] p-1 flex flex-col justify-around">
+                                <div className="w-full h-[50%] flex justify-center items-center">
+                                    <div className="align-middle flex justify-center items-center">
+                                        <span className="font-sf-light">Swap fee:</span>
+                                        <span className="ml-1 text-5xl font-sf-bold">{fee === null ? <Spinner /> : fee}</span>
+                                        <img src="/images/usdc.svg" alt="USDC" className="inline w-[15px] h-[15px] ml-2" />
+                                        <span className="ml-1 text-md font-sf-medium">
+                                            yUSDC
+                                        </span>
                                     </div>
                                 </div>
+                                <div className="w-full h-[15%] text-[11px] flex justify-start ps-8 items-center">
+                                    <span className="cursor-pointer">Balance: <span>{balance} <img src="/images/usdc.svg" alt="yUSDC" className="w-[10px] h-[10px] inline mb-[2px]" /> yUSDC</span> <img src={getChainImage(swapChainId as number)} alt={getChainName(swapChainId as number)} className="w-[10px] h-[10px] inline mb-[2px]" /></span>
+                                </div>
+                                <div className="w-full h-[15%] text-[11px] flex justify-start ps-8 items-center">
+                                    <a href={getUrlForAddress(swapChainId as SupportedChains, pair)} target="_blank"><span className="cursor-pointer">Pair: <span>{truncateAddress(pair, 10)}</span> <img src={getChainImage(swapChainId as number)} alt={getChainName(swapChainId as number)} className="w-[10px] h-[10px] inline mb-[2px]" /></span></a>
+                                </div>
+                                <div className="w-full h-[15%] text-[11px] flex justify-start ps-8 items-center">
+                                    <a href={getUrlForAddress(swapChainId as SupportedChains, router)} target="_blank"><span className="cursor-pointer">Router: <span>{truncateAddress(router, 10)}</span> <img src={getChainImage(swapChainId as number)} alt={getChainName(swapChainId as number)} className="w-[10px] h-[10px] inline mb-[2px]" /></span></a>
+                                </div>
                             </div>
-                        </GradientDiv>
+                        </div>
                     </div>
                     <div
-                        className="w-full h-[60px] bg-button mt-5 rounded-[12px] hover:opacity-85"
+                        className="w-full h-[60px] bg-button mt-5 rounded-[12px]"
                         onClick={handleSwap}
                     >
-                        <GradientDiv>
-                            <div className="w-full h-full bg-button rounded-[12px] text-center flex justify-center items-center font-sf-medium text-2xl cursor-pointer">
-                                {
-                                    !inProgress && chainId != swapChainId
-                                        ? `Switch to ${titleCase(getChainName(swapChainId as number) as string)}`
-                                        : !hasAgreed
-                                            ? "Agree"
-                                            : inProgress
-                                                ? <div className="w-full flex justify-center items-center">
-                                                    {progressStatus}... <span className="ml-3"><Spinner /></span>
-                                                </div>
-                                                : <div className={`w-full h-full flex justify-center items-center ${!canSwap && "cursor-not-allowed opacity-40"}`}>
-                                                    Approve and swap
-                                                </div>
-                                }
-                            </div>
-                        </GradientDiv>
+                        <div className="w-full h-full bg-button rounded-[12px] text-center flex justify-center items-center text-lg font-normal cursor-pointer">
+                            {
+                                !inProgress && chainId != swapChainId
+                                    ? `Switch to ${titleCase(getChainName(swapChainId as number) as string)}`
+                                    : !hasAgreed
+                                        ? "Agree"
+                                        : inProgress
+                                            ? <div className="w-full flex justify-center items-center">
+                                                {progressStatus} <span className="ml-3"><Spinner /></span>
+                                            </div>
+                                            : <div className={`w-full h-full flex justify-center items-center ${!canSwap ? "cursor-not-allowed opacity-40" : "hover:opacity-85"}`}>
+                                                Approve and swap
+                                            </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

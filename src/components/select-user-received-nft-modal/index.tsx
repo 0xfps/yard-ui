@@ -19,6 +19,7 @@ import { useSwapMode } from "@/store/swap-mode-store"
 import ToolTipDiv from "../tooltip"
 import { ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips"
 import { FaToggleOff } from "react-icons/fa6"
+import Skeleton from "react-loading-skeleton"
 
 export default function SelectUserReceivedNFTModal() {
     const {
@@ -175,9 +176,8 @@ export default function SelectUserReceivedNFTModal() {
                     <div className="w-full h-full">
                         {
                             loading === true &&
-                            <div className="w-full h-full flex flex-col justify-center items-center">
-                                <Spinner />
-                                <span className="text-xs mt-2">Fetching pair...</span>
+                            <div className="w-full h-full">
+                                <Skeleton baseColor="#192126" highlightColor="#5a5d5e" />
                             </div>
                         }
                         {

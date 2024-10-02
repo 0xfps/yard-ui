@@ -11,6 +11,7 @@ import { getChainName } from "@/utils/get-chain-name"
 import { titleCase } from "@/utils/title-case"
 import { useSwapData } from "@/store/swap-data-store"
 import { useModal } from "@/store/modal-store"
+import Skeleton from "react-loading-skeleton"
 
 export default function SelectUserNFTModal() {
     const { address, isConnected, chainId } = useAccount()
@@ -85,9 +86,8 @@ export default function SelectUserNFTModal() {
                         <div className="w-full h-[70%] mt-5 overflow-y-scroll">
                             {
                                 usersOwnedNFTs === null &&
-                                <div className="w-full h-full flex flex-col justify-center items-center">
-                                    <Spinner />
-                                    <span className="text-xs mt-2">Fetching your NFTs on {titleCase(getChainName(chainId) ?? "")}...</span>
+                                <div className="w-full h-[full]">
+                                    <Skeleton baseColor="#192126" highlightColor="#5a5d5e" count={5} height={40} className="mt-2"/>
                                 </div>
                             }
                             {

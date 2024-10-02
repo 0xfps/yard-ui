@@ -1,3 +1,5 @@
+"use client"
+
 import { useAccount } from "wagmi"
 import { wagmiConfig } from "../../../public/config/wagmi-config"
 import { switchChain } from '@wagmi/core'
@@ -27,8 +29,8 @@ export default function UserNotOnSupportedChainForSwap() {
             </div>
 
             <div className="text-sm font-sf-light mt-12 text-center">
-                We discovered that you are not connected to a chain that Yard supports, please click on one
-                of the chains above that we support to access the features of Yard.
+                We discovered that you are not connected to a chain that is supported on Yard, please click on one
+                of the chains above to connect to and access the features of Yard.
             </div>
         </div>
     )

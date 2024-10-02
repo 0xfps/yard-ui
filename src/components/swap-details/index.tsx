@@ -1,6 +1,7 @@
+"use client"
+
 import { useSwapData } from "@/store/swap-data-store";
 import { LuRefreshCw } from "react-icons/lu";
-import GradientDiv from "../gradient-div";
 import { useEffect, useState } from "react";
 import abis from "../../../public/json/abis.json"
 import deployments from "../../../public/json/deployments.json"
@@ -20,6 +21,7 @@ import { useModal } from "@/store/modal-store";
 import { APPROVE_BALANCE_OF_ABI, APPROVE_NFT_ABI } from "@/utils/constants";
 import { writeContract } from '@wagmi/core'
 import { waitForTransactionReceipt } from '@wagmi/core'
+import Skeleton from "react-loading-skeleton";
 
 export default function SwapDetails() {
     const { address, chainId } = useAccount()
@@ -182,7 +184,7 @@ export default function SwapDetails() {
     }
 
     return (
-        <div className="w-[554px] h-[495px] rounded-[12px]">
+        <div className="w-[554px] h-fit rounded-[12px]">
             <div className="w-[90%] h-full p-5 bg-background m-auto">
                 <div className="text-center font-sf-bold text-2xl">
                     Swap Details
@@ -215,7 +217,13 @@ export default function SwapDetails() {
                                 <div className="w-full h-[50%] flex justify-center items-center">
                                     <div className="align-middle flex justify-center items-center">
                                         <span className="font-sf-light">Swap fee:</span>
-                                        <span className="ml-1 text-5xl font-sf-bold">{fee === null ? <Spinner /> : fee}</span>
+                                        <div className="ml-1 text-5xl font-sf-bold w-[75px] h-fit rounded-[12px]">
+                                            {
+                                                fee === null
+                                                    ? <Skeleton baseColor="rgba(6, 7, 10, 0.5)" highlightColor="rgba(6, 7, 10, 0.1)" />
+                                                    : fee
+                                            }
+                                        </div>
                                         <img src="/images/usdc.svg" alt="USDC" className="inline w-[15px] h-[15px] ml-2" />
                                         <span className="ml-1 text-md font-sf-medium">
                                             yUSDC
@@ -234,8 +242,9 @@ export default function SwapDetails() {
                             </div>
                         </div>
                     </div>
+
                     <div
-                        className="w-full h-[60px] bg-button mt-5 rounded-[12px]"
+                        className={`w-full h-[60px] bg-button mt-5 rounded-[12px] ${inProgress && " cursor-not-allowed opacity-40"}`}
                         onClick={handleSwap}
                     >
                         <div className="w-full h-full bg-button rounded-[12px] text-center flex justify-center items-center text-lg font-normal cursor-pointer">

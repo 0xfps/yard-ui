@@ -1,8 +1,11 @@
+"use client"
+
 import { useModal } from "@/store/modal-store"
 import { useSwapData } from "@/store/swap-data-store"
 import { LuRefreshCw } from "react-icons/lu"
 import { getUrlForTransaction } from "@/utils/get-url"
 import { SupportedChains } from "@/types/supported-chains"
+import { HiMiniArrowTopRightOnSquare } from "react-icons/hi2"
 
 export default function SuccessModal() {
     const {
@@ -42,8 +45,10 @@ export default function SuccessModal() {
                         </div>
                     </div>
                 </div>
-                <div className="mt-7 text-center">
-                    <a href={getUrlForTransaction(swapChainId as SupportedChains, hash)} className="text-xs hover:opacity-80" target="_blank">View transaction</a>
+                <div className="mt-7 text-center underline decoration-1">
+                    <a href={getUrlForTransaction(swapChainId as SupportedChains, hash)} className="text-xs hover:opacity-80 flex justify-center items-center" target="_blank">
+                        View transaction <HiMiniArrowTopRightOnSquare className="ml-2" />
+                    </a>
                 </div>
                 <div className="w-full h-[60px] bg-button mt-5 rounded-[12px] hover:opacity-85" onClick={() => { setCurrentModal(""); clear() }}>
                     <div className="w-full h-full bg-button rounded-[12px] text-center flex justify-center items-center font-sf-medium text-2xl cursor-pointer">

@@ -1,3 +1,5 @@
+"use client"
+
 import { useModal } from "@/store/modal-store"
 import { useSwapData } from "@/store/swap-data-store"
 import GradientDiv from "../gradient-div"

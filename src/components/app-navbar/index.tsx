@@ -36,7 +36,7 @@ export default function AppNavBar({ name }: ActivePage) {
                 <a href="/swap" className={`${name == "swap" && "y-active"} hover:opacity-90 ml-10`}>Swap</a>
             </div>
             {/* Connect Wallet And Chain */}
-            <div className="w-[20%] p-1 h-full flex items-center justify-between">
+            <div className="w-[15%] p-1 h-full flex items-center justify-between">
                 <CurrentChain />
                 {(!userIsConnected || !isConnected) ? <ConnectWalletButton /> : <WalletInfo />}
             </div>

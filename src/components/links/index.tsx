@@ -7,7 +7,7 @@ export default function Links() {
     return (
         <div className="w-[85%] flex justify-between m-auto mt-[200px] text-text">
             {/* Documentation. */}
-            <div className="w-[48%] shadow-md shadow-div-grad-start h-[300px] bg-hero rounded-[12px] px-12 py-4">
+            <div className="w-[48%] shadow-sm shadow-div-grad-start h-[300px] bg-hero rounded-[12px] px-12 py-4">
                 <div className="font-sf-medium text-[28px] text-button">
                     Superpowers for the liquidity providers
                 </div>
@@ -28,7 +28,7 @@ export default function Links() {
             </div>
             {/* GitHub and Twitter. */}
             <div className="w-[48%] h-[300px] flex flex-col justify-between">
-                <div className="shadow-md shadow-div-grad-start h[fit] bg-hero rounded-[12px] px-12 py-6">
+                <div className="shadow-sm shadow-div-grad-start h[fit] bg-hero rounded-[12px] px-12 py-6">
                     <a href="https://github.com/0xfps/yard" target="_blank">
                         <div className="font-sf-medium text-[28px] text-button flex justify-between items-center">
                             GitHub <GoArrowUpRight />
@@ -38,7 +38,7 @@ export default function Links() {
                         </div>
                     </a>
                 </div>
-                <div className="shadow-md shadow-div-grad-start h[fit] bg-hero rounded-[12px] px-12 py-6">
+                <div className="shadow-sm shadow-div-grad-start h[fit] bg-hero rounded-[12px] px-12 py-6">
                     <a href="https://twitter.com/swaponyard" target="_blank">
                         <div className="font-sf-medium text-[28px] text-button flex justify-between items-center">
                             Twitter <GoArrowUpRight />

@@ -33,11 +33,9 @@ export default function ModalContainer({ children }: Props) {
         currentModal != "" &&
         <div className="w-full h-full p-10 flex justify-center items-center backdrop-blur-md absolute z-10" datatype="visible" id="modal-container" data-aos="zoom-in" onClick={closeModal}>
             <div id="modal-box">
-                <GradientDiv>
-                    <div className="w-full h-full bg-background rounded-[12px] p-5 text-text font-sf-light">
-                        {children}
-                    </div>
-                </GradientDiv>
+                <div className="w-full h-full bg-background rounded-[12px] p-5 text-text font-sf-light">
+                    {children}
+                </div>
             </div>
         </div>
     )

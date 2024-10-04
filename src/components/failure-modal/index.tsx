@@ -5,7 +5,8 @@ import { useSwapData } from "@/store/swap-data-store"
 import GradientDiv from "../gradient-div"
 
 export default function FailureModal() {
-    const {failureReason
+    const {
+        failureReason
     } = useSwapData()
     const { setCurrentModal, previousModal } = useModal()
 
@@ -18,15 +19,13 @@ export default function FailureModal() {
                 <div className="text-center font-sf-bold text-2xl mt-4">
                     Swap Failed
                 </div>
-                <div className="w-full h-[30%] mt-10 text-center tracking-wide">
+                <div className="w-full h-[30%] mt-12 text-center tracking-wide">
                     {failureReason}
                 </div>
                 <div className="w-full h-[60px] bg-button mt-4 rounded-[12px] hover:opacity-85" onClick={() => setCurrentModal(previousModal)}>
-                    <GradientDiv>
-                        <div className="w-full h-full bg-button rounded-[12px] text-center flex justify-center items-center font-sf-medium text-2xl cursor-pointer">
-                            Close
-                        </div>
-                    </GradientDiv>
+                    <div className="w-full h-full bg-button rounded-[12px] text-center flex justify-center items-center font-sf-medium text-2xl cursor-pointer">
+                        Close
+                    </div>
                 </div>
             </div>
         </div>

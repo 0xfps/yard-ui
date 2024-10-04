@@ -5,7 +5,7 @@ export const ARBITRARY_SWAP_CONTENT = `
 `
 
 export const SECOND_ARBITRARY_SWAP_CONTENT = `
-    Toggling this on will automatically select an NFT available in the pool for you,
-    as determined by the system for you to receive.
+    Toggling this on will automatically select an NFT available in the pool as determined
+    by the system for you to receive.
     Likewise, toggling this off gives you the liberty to choose what you would receive.
 `

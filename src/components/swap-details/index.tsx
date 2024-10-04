@@ -35,7 +35,7 @@ export default function SwapDetails() {
     const {
         ownerNFTImage, ownerNFTName, ownerNFTAddress, ownerNFTID,
         selectedNFTImage, selectedNFTName, selectedNFTAddress, selectedNFTId,
-        swapChainId, pair, router, setHash
+        swapChainId, pair, router, setHash, setFailureReason
     } = useSwapData()
     const { setPreviousModal, setCurrentModal } = useModal()
 
@@ -58,7 +58,7 @@ export default function SwapDetails() {
                 setBalance(balanceBase)
                 setCanSwap(balanceBase >= feeBase)
             })()
-    }, [])
+    }, [address])
 
     async function switchToChain(chainId: SupportedChains) {
         await switchChain(wagmiConfig, { chainId: chainId })
@@ -93,7 +93,11 @@ export default function SwapDetails() {
                 if (nftSwapped) {
                     setInProgress(false)
                     setCurrentModal("TRANSACTION_SUCCESSFUL")
+                } else {
+                    setCurrentModal("TRANSACTION_FAILED")
                 }
+            } else {
+                setCurrentModal("TRANSACTION_FAILED")
             }
         }
 
@@ -148,7 +152,8 @@ export default function SwapDetails() {
                 const transactionReceipt = await waitForTransactionReceipt(wagmiConfig, { hash })
                 return transactionReceipt ? true : false
             } else return false
-        } catch {
+        } catch (e: any) {
+            setFailureReason("You do not own the NFT you're trying to approve.")
             return false
         }
     }
@@ -178,7 +183,8 @@ export default function SwapDetails() {
                 transactionReceipt && setHash(hash)
                 return transactionReceipt ? true : false
             } else return false
-        } catch {
+        } catch (e) {
+            setFailureReason("")
             return false
         }
     }
@@ -231,7 +237,7 @@ export default function SwapDetails() {
                                     </div>
                                 </div>
                                 <div className="w-full h-[15%] text-[11px] flex justify-start ps-8 items-center">
-                                    <span className="cursor-pointer">Balance: <span>{balance} <img src="/images/usdc.svg" alt="yUSDC" className="w-[10px] h-[10px] inline mb-[2px]" /> yUSDC</span> <img src={getChainImage(swapChainId as number)} alt={getChainName(swapChainId as number)} className="w-[10px] h-[10px] inline mb-[2px]" /></span>
+                                    <span className="cursor-pointer">Balance: <span className={`${(balance < fee!) ? "text-[#FF0000]" : "text-[#00FF00]"}`}>{balance} <img src="/images/usdc.svg" alt="yUSDC" className="w-[10px] h-[10px] inline mb-[2px]" /> yUSDC</span> <img src={getChainImage(swapChainId as number)} alt={getChainName(swapChainId as number)} className="w-[10px] h-[10px] inline mb-[2px]" /></span>
                                 </div>
                                 <div className="w-full h-[15%] text-[11px] flex justify-start ps-8 items-center">
                                     <a href={getUrlForAddress(swapChainId as SupportedChains, pair)} target="_blank"><span className="cursor-pointer">Pair: <span>{truncateAddress(pair, 10)}</span> <img src={getChainImage(swapChainId as number)} alt={getChainName(swapChainId as number)} className="w-[10px] h-[10px] inline mb-[2px]" /></span></a>
@@ -252,7 +258,7 @@ export default function SwapDetails() {
                                 !inProgress && chainId != swapChainId
                                     ? `Switch to ${titleCase(getChainName(swapChainId as number) as string)}`
                                     : !hasAgreed
-                                        ? "Agree"
+                                        ? "Accept Disclaimer"
                                         : inProgress
                                             ? <div className="w-full flex justify-center items-center">
                                                 {progressStatus} <span className="ml-3"><Spinner /></span>

@@ -11,7 +11,9 @@
   "dependencies": {
     "@nextui-org/react": "^2.4.6",
     "@tanstack/react-query": "^5.54.1",
+    "@types/comma-number": "^2.1.2",
     "aos": "^2.3.4",
+    "comma-number": "^2.1.0",
     "dotenv": "^16.4.5",
     "ethers": "^6.13.2",
     "framer-motion": "^11.4.0",

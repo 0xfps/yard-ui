@@ -152,6 +152,7 @@ export default function SelectUserReceivedNFTModal() {
                 <div className="w-full h-fit mt-4 py-2 flex justify-around flex-wrap">
                     {
                         nfts.map(function ({ name, image, address }: CollectionInterface, index: number) {
+                            if (address == ownerNFTAddress) return
                             return (
                                 <div
                                     key={index}

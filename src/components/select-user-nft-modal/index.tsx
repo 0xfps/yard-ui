@@ -64,6 +64,7 @@ export default function SelectUserNFTModal() {
     }
 
     function setOwnerNFTData(data: SimpleHashNFTResponse) {
+        console.log({ data })
         setOwnerNFTAddress(data.contract_address)
         setOwnerNFTId(parseInt(data.token_id))
         setOwnerNFTImage(data.image_url)
@@ -73,7 +74,7 @@ export default function SelectUserNFTModal() {
     }
 
     return (
-        <div className="w-[350px] h-[460px] p-5">
+        <div className="w-[350px] h-fit max-h-[460px] p-5">
             {
                 !isOnSupportedChain
                     ? <UserNotOnSupportedChainForSwap />
@@ -87,10 +88,10 @@ export default function SelectUserNFTModal() {
                         </div>
 
                         <div className="mt-3 w-full h-[13%] flex justify-center items-center relative">
-                            <input type="text" className="w-full h-full rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search by name or id" onChange={sortAndSetNFTs} />
+                            <input type="text" className="w-full h-[50px] rounded-md bg-[#192126] px-2 pe-10 text-[13px] tracking-wider font-sf-light border-none outline-none" placeholder="Search by name or id" onChange={sortAndSetNFTs} />
                             <FaSearch className="text-xs absolute right-0 mr-5" />
                         </div>
-                        <div className="w-full h-[70%] mt-4 overflow-y-scroll">
+                        <div className="w-full h-[295px] mt-4 overflow-y-scroll">
                             {
                                 usersOwnedNFTs === null &&
                                 <div className="w-full h-[full]">

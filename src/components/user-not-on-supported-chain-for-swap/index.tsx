@@ -14,17 +14,18 @@ export default function UserNotOnSupportedChainForSwap() {
             await switchChain(wagmiConfig, { chainId: chainId as any })
         } catch { }
     }
+
     return (
-        <div>
+        <div className="">
             <div className="text-text text-center font-sf-bold text-lg">
                 <p>You're Not On A Supported Chain</p>
             </div>
 
-            <div className="flex justify-between items-center h-[80px] mt-12 px-2">
+            <div className="flex justify-around items-center h-[80px] mt-12 px-2">
                 <img src="/images/arbitrum.png" title="Arbitrum Sepolia Testnet" alt="Arbitrum" className="w-[40px] h-[40px] cursor-pointer" onClick={() => switchToChain(ARBITRUM_CHAIN_ID)} />
                 <img src="/images/base.png" title="Base Sepolia Testnet" alt="Base" className="w-[40px] h-[40px] cursor-pointer" onClick={() => switchToChain(BASE_CHAIN_ID)} />
                 <img src="/images/bsc.png" title="BSC Testnet" alt="BSC" className="w-[40px] h-[40px] cursor-pointer" onClick={() => switchToChain(BSC_CHAIN_ID)} />
-                <img src="/images/scroll.png" title="Scroll Sepolia Testnet" alt="Scroll" className="w-[40px] h-[40px] cursor-pointer" onClick={() => switchToChain(SCROLL_CHAIN_ID)} />
+                {/* <img src="/images/scroll.png" title="Scroll Sepolia Testnet" alt="Scroll" className="w-[40px] h-[40px] cursor-pointer" onClick={() => switchToChain(SCROLL_CHAIN_ID)} /> */}
                 <img src="/images/sepolia.png" title="Ethereum Sepolia Testnet" alt="Sepolia" className="w-[40px] h-[40px] cursor-pointer" onClick={() => switchToChain(SEPOLIA_CHAIN_ID)} />
             </div>
 

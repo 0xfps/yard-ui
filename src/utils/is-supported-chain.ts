@@ -1,6 +1,6 @@
-import { SUPPORTED_CHAIN_IDS } from "./constants";
+import chainData from "../../public/json/chain-data.json"
 
 export function isSupportedChain(chainId: number | undefined): boolean {
     if (!chainId) return false
-    return SUPPORTED_CHAIN_IDS.includes(chainId)
+    return Object.keys(chainData.supportedChains).includes(chainId.toString())
 }

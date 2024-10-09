@@ -89,6 +89,7 @@ export default function SelectUserReceivedNFTModal() {
         const YardFactory = new ethers.Contract(factory, factoryAbi as any, provider)
         const pair = await YardFactory.getPair(ownerNFTAddress, address)
 
+        console.log({ ownerNFTAddress, address, pair, factory, router })
         if (pair == ethers.ZeroAddress) {
             setPairExists(false)
             setLoading(false)
@@ -143,7 +144,7 @@ export default function SelectUserReceivedNFTModal() {
                 <div className="w-full font-sf-bold text-xl">
                     Select NFT Collection
                 </div>
-                
+
                 <div className="w-full font-extralight text-xs mt-3 opacity-70">
                     Choose an NFT collection on {titleCase(getChainName(swapChainId as SupportedChains) ?? "")} to view NFTs in the pool.
                 </div>

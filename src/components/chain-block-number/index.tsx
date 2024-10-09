@@ -8,23 +8,25 @@ import { ethers } from "ethers";
 import "./style.css"
 
 export default function ChainBlockNumber() {
-    const { chain } = useAccount()
+    const { chainId, isConnected } = useAccount()
     const [blockNumber, setBlockNumber] = useState<number>(0)
-    const [isOnSupportedChain,] = useState<boolean>(isSupportedChain(chain?.id))
+    const [isOnSupportedChain, setIsOnSupportedChain] = useState<boolean>()
     const [interval, setBInterval] = useState<any>(null)
     const ONE_MINUTE = 1000 * 60
 
     useEffect(function () {
-        if (isOnSupportedChain) {
+        if (isSupportedChain(chainId)) {
+            setIsOnSupportedChain(true)
             getBlockNumber()
             setBlockNumberFetchInterval()
         } else {
+            setIsOnSupportedChain(false)
             return function () {
                 if (interval)
                     clearInterval(interval)
             }
         }
-    }, [chain])
+    }, [chainId, isConnected])
 
     function setBlockNumberFetchInterval() {
         const interval = setInterval(getBlockNumber, ONE_MINUTE)
@@ -32,7 +34,7 @@ export default function ChainBlockNumber() {
     }
 
     async function getBlockNumber() {
-        const chainName = getChainName(chain?.id)
+        const chainName = getChainName(chainId)
         const chainRPC = getChainRPC(chainName as string)
         const chainProvider = new ethers.JsonRpcProvider(chainRPC);
         const blockNumber = await chainProvider.getBlockNumber()

@@ -139,7 +139,7 @@ export default function SelectUserReceivedNFTModal() {
     }, [isArbitrarySwap])
 
     return (
-        <div className="w-[400px] max-h-[600px] py-5">
+        <div className="w-[400px] max-h-[630px] py-5">
             <div className="w-full h-full text-text">
                 <div className="w-full font-sf-bold text-xl">
                     Select NFT Collection

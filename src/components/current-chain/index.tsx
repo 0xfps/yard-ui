@@ -64,7 +64,7 @@ export default function CurrentChain() {
     }
 
     return (
-        <div className="w-fit h-[48px] rounded-[12px] relative" id="y-chain-button">
+        <div className="w-fit h-[48px] rounded-[12px] relative mr-5" id="y-chain-button">
             {
                 (isConnected && isSupportedChain(chainId))
                     ? <button className="w-full h-full flex items-center font-sf-light justify-center bg-background rounded-[12px] p-3" onClick={showDropdown}>

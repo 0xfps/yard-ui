@@ -25,12 +25,12 @@ export default function Chains() {
                     <a href={deploymentAddresses.arbitrum} target="_blank"><img src="/images/arbitrum.png" alt="Arbitrum" className="w-[90px] h-[90px]" /></a>
                     <a href={deploymentAddresses.base} target="_blank"><img src="/images/base.png" alt="Base" className="w-[90px] h-[90px]" /></a>
                     <a href={deploymentAddresses.bsc} target="_blank"><img src="/images/bsc.png" alt="BSC" className="w-[90px] h-[90px]" /></a>
-                    <a href={deploymentAddresses.scroll} target="_blank"><img src="/images/scroll.png" alt="Scroll" className="w-[90px] h-[90px]" /></a>
+                    {/* <a href={deploymentAddresses.scroll} target="_blank"><img src="/images/scroll.png" alt="Scroll" className="w-[90px] h-[90px]" /></a> */}
                     <a href={deploymentAddresses.sepolia} target="_blank"><img src="/images/sepolia.png" alt="Sepolia" className="w-[90px] h-[90px]" /></a>
                     <a href={deploymentAddresses.arbitrum} target="_blank"><img src="/images/arbitrum.png" alt="Arbitrum" className="w-[90px] h-[90px]" /></a>
                     <a href={deploymentAddresses.base} target="_blank"><img src="/images/base.png" alt="Base" className="w-[90px] h-[90px]" /></a>
                     <a href={deploymentAddresses.bsc} target="_blank"><img src="/images/bsc.png" alt="BSC" className="w-[90px] h-[90px]" /></a>
-                    <a href={deploymentAddresses.scroll} target="_blank"><img src="/images/scroll.png" alt="Scroll" className="w-[90px] h-[90px]" /></a>
+                    {/* <a href={deploymentAddresses.scroll} target="_blank"><img src="/images/scroll.png" alt="Scroll" className="w-[90px] h-[90px]" /></a> */}
                     <a href={deploymentAddresses.sepolia} target="_blank"><img src="/images/sepolia.png" alt="Sepolia" className="w-[90px] h-[90px]" /></a>
                 </div>
             </Marquee>

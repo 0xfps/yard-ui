@@ -9,6 +9,7 @@ import { useAccount } from "wagmi";
 import { useSwapData } from "@/store/swap-data-store";
 import { ARBITRARY_SWAP_CONTENT } from "@/utils/tooltips";
 import { useModal } from "@/store/modal-store";
+import { GoArrowUpRight } from "react-icons/go";
 
 export default function SwapModal() {
     const { isConnected } = useAccount()
@@ -33,13 +34,18 @@ export default function SwapModal() {
         <div className="w-full">
             <div className="w-[554px] h-[495px] mt-8 rounded-[12px] m-auto">
                 <div className="w-full h-full px-5 bg-background rounded-[12px]">
-                    <div className="w-full h-[60px] flex justify-end items-center text-xs cursor-pointer font-sf-light">
-                        <ToolTipDiv trigger="Arbitrary swap" content={ARBITRARY_SWAP_CONTENT} />
-                        {
-                            isArbitrarySwap
-                                ? <FaToggleOn className="text-3xl cursor-pointer ml-3 text-button" onClick={toggleArbitrarySwap} />
-                                : <FaToggleOff className="text-3xl cursor-pointer ml-3 text-button opacity-70" onClick={toggleArbitrarySwap} />
-                        }
+                    <div className="w-full h-[60px] flex justify-between items-center text-xs cursor-pointer font-sf-light">
+                        <a href="https://yard-faucet.vercel.app/" target="_blank" className="flex items-center text-button-light hover:opacity-80">
+                            Get free NFTs and fee tokens from the faucet <GoArrowUpRight className="ml-1"/>
+                        </a>
+                        <div className="flex items-center">
+                            <ToolTipDiv trigger="Arbitrary swap" content={ARBITRARY_SWAP_CONTENT} />
+                            {
+                                isArbitrarySwap
+                                    ? <FaToggleOn className="text-3xl cursor-pointer ml-3 text-button" onClick={toggleArbitrarySwap} />
+                                    : <FaToggleOff className="text-3xl cursor-pointer ml-3 text-button opacity-70" onClick={toggleArbitrarySwap} />
+                            }
+                        </div>
                     </div>
                     <div className="w-full h-[60%] rounded-[12px] flex flex-col justify-between relative">
                         <TopNFTSelect />

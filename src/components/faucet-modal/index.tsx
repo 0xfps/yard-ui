@@ -47,10 +47,12 @@ export default function FaucetModal() {
         setIsMinting(true)
         const hasMintedNFT = await mintNFT()
         if (hasMintedNFT) {
-            await mintTokens()
+            const hasMintedTokens = await mintTokens()
+            if (hasMintedTokens) {
+                setHasMinted(true)
+            }
         }
         setIsMinting(false)
-        setHasMinted(true)
     }
 
     async function mintNFT(): Promise<boolean> {

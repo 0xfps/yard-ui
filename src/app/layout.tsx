@@ -1,28 +1,37 @@
 "use client"
 
-import { WagmiProvider } from "wagmi";
-import App from "./app";
 import "./globals.css";
-import { wagmiConfig } from "../../public/config/wagmi-config";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import Modals from "@/components/modals";
 import 'react-loading-skeleton/dist/skeleton.css'
-
-const queryClient = new QueryClient()
+import useWindowDimensions from "@/hooks/useWindowDimensions";
+import AppContainer from "@/components/app-container";
+import App from "./app";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { width } = useWindowDimensions()
+
   return (
-    <WagmiProvider config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        <App>
-          <Modals />
-          {children}
-        </App>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <html lang="en">
+      <head>
+        <meta name="viewport" content="width=1024" />
+        <link rel="icon" href="/images/yard.png" />
+      </head>
+      <body>
+        {
+          width != 0 ?
+            (width >= 800)
+              ? <App>{children}</App>
+              : <AppContainer>
+                <div className="w-full h-full flex justify-center items-center text-3xl font-sf-bold">
+                  Yard is not supported on small screens.
+                </div>
+              </AppContainer>
+            : <></>
+        }
+      </body>
+    </html>
   );
 }

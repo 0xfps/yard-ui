@@ -1,15 +1,20 @@
 "use client"
 
+import { WagmiProvider } from "wagmi";
+import "./globals.css";
+import { wagmiConfig } from "../../public/config/wagmi-config";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Modals from "@/components/modals";
 import { Props } from "@/interfaces/props";
+const queryClient = new QueryClient()
 
 export default function App({ children }: Props) {
     return (
-        <html lang="en">
-            <head>
-                <meta name="viewport" content="width=800, initial-scale=0.2"/>
-                <link rel="icon" href="/images/yard.png" />
-            </head>
-            <body>{children}</body>
-        </html>
+        <WagmiProvider config={wagmiConfig}>
+            <QueryClientProvider client={queryClient}>
+                <Modals />
+                {children}
+            </QueryClientProvider>
+        </WagmiProvider>
     )
 }

@@ -103,19 +103,19 @@ export default function CurrentChain() {
                     </div>
 
                     <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("base"))}>
-                        <img src="/images/base.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Base Sepolia</span>
+                        <img src="/images/base.png" alt="Base Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Base Sepolia</span>
                     </div>
 
                     <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("bsc"))}>
-                        <img src="/images/bsc.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">BSC Testnet</span>
+                        <img src="/images/bsc.png" alt="BSC Image" className="w-[25px] h-[25px]" /> <span className="ml-3">BSC Testnet</span>
                     </div>
 
                     {/* <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("scroll"))}>
-                        <img src="/images/scroll.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Scroll</span>
+                        <img src="/images/scroll.png" alt="Scroll Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Scroll</span>
                     </div> */}
 
                     <div className="flex items-center w-[95%] m-auto hover:cursor-pointer hover:bg-button-light-rgb rounded-[12px] p-2" onClick={() => switchToChain(getChainId("sepolia"))}>
-                        <img src="/images/sepolia.png" alt="Arbitrum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Ethereum Sepolia</span>
+                        <img src="/images/sepolia.png" alt="Ethereum Image" className="w-[25px] h-[25px]" /> <span className="ml-3">Ethereum Sepolia</span>
                     </div>
                 </div>
             </div>

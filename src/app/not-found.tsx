@@ -24,7 +24,7 @@ export default function NotFound() {
                                 404
                             </div>
                             <div className="text-[25px] font-normal mt-5">
-                                Oops! You ran out of Oxygen.
+                                Oops! You ran out of Gas :(.
                             </div>
                             <div className="text-[20px] font-thin mt-1">
                                 The page you are looking for doesn't exist.

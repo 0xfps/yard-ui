@@ -1,3 +1,3 @@
 export interface ActivePage {
-    name: "swap" | "liquidity"
+    name: "swap" | "liquidity" | "faucet"
 }

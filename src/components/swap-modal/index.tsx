@@ -35,8 +35,8 @@ export default function SwapModal() {
             <div className="w-[554px] h-[495px] mt-8 rounded-[12px] m-auto">
                 <div className="w-full h-full px-5 bg-background rounded-[12px]">
                     <div className="w-full h-[60px] flex justify-between items-center text-xs cursor-pointer font-sf-light">
-                        <a href="https://yard-faucet.vercel.app/" target="_blank" className="flex items-center text-button-light hover:opacity-80">
-                            Get free NFTs and fee tokens from the faucet <GoArrowUpRight className="ml-1"/>
+                        <a href="/faucet" target="_blank" className="flex items-center text-button-light hover:opacity-80">
+                            Get free NFTs and fee tokens from the faucet <GoArrowUpRight className="ml-1" />
                         </a>
                         <div className="flex items-center">
                             <ToolTipDiv trigger="Arbitrary swap" content={ARBITRARY_SWAP_CONTENT} />

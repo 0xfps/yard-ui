@@ -12,7 +12,7 @@ export default function NavBarHome() {
                 <div className="relative w-[30%] h-full bg-transparent rounded-[12px] flex flex-row justify-around items-center text-text font-sf-light backdrop-blur-lg">
                     <a href="/" className="rounded-[10px] w-fit p-[10px] hover:bg-night-light hover:bg-opacity-[.05] hover:backdrop-blur-lg text-lg">Home</a>
                     <a href="/swap" target="_blank" className="rounded-[10px] w-fit p-[10px] hover:bg-night-light hover:bg-opacity-[.05] hover:backdrop-blur-lg text-lg">Swap</a>
-                    <a href="https://yard-faucet.vercel.app/" target="_blank" className="rounded-[10px] w-fit p-[10px] hover:bg-night-light hover:bg-opacity-[.05] hover:backdrop-blur-lg text-lg">Faucet</a>
+                    <a href="/faucet" target="_blank" className="rounded-[10px] w-fit p-[10px] hover:bg-night-light hover:bg-opacity-[.05] hover:backdrop-blur-lg text-lg">Faucet</a>
                     <a href="/about" target="_blank" className="rounded-[10px] w-fit p-[10px] hover:bg-night-light hover:bg-opacity-[.05] hover:backdrop-blur-lg text-lg">About</a>
                 </div>
                 <a href="/swap" target="_blank">

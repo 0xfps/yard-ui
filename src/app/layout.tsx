@@ -22,7 +22,7 @@ export default function RootLayout({
       <body>
         {
           width != 0 ?
-            (width >= 800)
+            (width >= 900)
               ? <App>{children}</App>
               : <AppContainer>
                 <div className="w-full h-full flex justify-center items-center text-3xl font-sf-bold">

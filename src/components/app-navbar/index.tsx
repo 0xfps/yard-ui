@@ -32,8 +32,8 @@ export default function AppNavBar({ name }: ActivePage) {
 
     return (
         <div className="h-[80px] w-full p-2 flex justify-between items-center">
-            <div className="w-[50%] p-1 h-full flex items-center justify-start font-sf-light text-sm">
-                <a href="/swap"><img src="/images/yard.png" alt="Yard Logo" className="w-[55px] h-[55px]" /></a>
+            <div className="w-[50%] p-1 h-full flex items-center justify-start font-sf-light text-sm tracking-wide">
+                <a href="/swap"><img src="/images/yard.png" alt="Yard Logo" className="w-[50px] h-[50px]" /></a>
                 <a href="/swap" className={`${name == "swap" && "y-active"} hover:opacity-90 ml-5`}>Swap</a>
                 <a href="/faucet" target="_blank" className={`${name == "faucet" && "y-active"} hover:opacity-90 ml-5`}>Faucet</a>
             </div>

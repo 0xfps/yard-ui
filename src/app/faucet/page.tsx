@@ -5,6 +5,7 @@ import AppNavBar from "@/components/app-navbar"
 import ChainBlockNumber from "@/components/chain-block-number"
 import FaucetHeader from "@/components/faucet-header"
 import FaucetModal from "@/components/faucet-modal"
+import SwapFooter from "@/components/swap-footer"
 import { useEffect } from "react"
 
 export default function Swap() {
@@ -18,6 +19,10 @@ export default function Swap() {
             <FaucetHeader />
             <FaucetModal />
             <ChainBlockNumber />
+            <div>
+                <br /><br />
+            </div>
+            <SwapFooter />
         </AppContainer>
     )
 }

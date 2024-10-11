@@ -138,7 +138,11 @@ export default function FaucetModal() {
                             Select NFT To Mint
                         </div>
 
-                        <div className="mt-16 w-full p-3 flex justify-between items-center">
+                        <div className="p-2 w-full font-thin text-center text-xs leading-6 tracking-wide opacity-70">
+                            Click on an NFT below to select.
+                        </div>
+
+                        <div className="mt-10 w-full p-3 flex justify-between items-center">
                             {
                                 nftCollectionsGeneralDataArray.map(function ({ name, image }, i: number) {
                                     return (
@@ -153,8 +157,12 @@ export default function FaucetModal() {
                                 })
                             }
                         </div>
-                        <div className="mt-10 p-2 w-full font-thin text-sm leading-6 tracking-wide">
-                            By tapping 'Mint', you'll seamlessly sign the transactions to mint 5 of the chosen NFT and add 500 yUSDC fee tokens to your wallet.
+
+                        <div className="mt-10 h-[80px] p-2 w-full font-thin text-sm leading-6 tracking-wide">
+                            {
+                                (selectedImg !== null && isConnected) &&
+                                "By tapping 'Mint', you'll seamlessly sign the transactions to mint 5 of the chosen NFT and add 500 yUSDC fee tokens to your wallet."
+                            }
                         </div>
 
                         <div>

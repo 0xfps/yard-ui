@@ -4,8 +4,8 @@ import { persist, createJSONStorage } from 'zustand/middleware'
 
 export const useSwapMode = create<SwapMode>()(
     persist(
-        (set) => ({
-            isArbitrarySwap: false,
+        (set, get) => ({
+            isArbitrarySwap: get()?.isArbitrarySwap ?? false,
             setIsArbitrarySwap: (val: boolean) => set({ isArbitrarySwap: val })
         }),
         {

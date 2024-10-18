@@ -52,7 +52,7 @@ export default function SelectUserReceivedNFTModal() {
     }, [])
 
     function sortNFTs(e: any) {
-        if ((e.target.value.slice(0, 2) == "0x") && (e.target.value.length == 42)) {
+        if (ethers.isAddress(e.target.value)) {
             loadData({ address: e.target.value } as CollectionInterface, Math.random())
             return
         }
@@ -196,10 +196,19 @@ export default function SelectUserReceivedNFTModal() {
                             </div>
                         }
                         {
-                            (loading === false && pairExists && nftsInPair?.length == 0) &&
+                            (loading === false && pairExists && allNftsInPair?.length == 0) &&
                             <div className="w-full h-full flex flex-col justify-center items-center">
                                 <FcCancel className="text-2xl" />
                                 <span className="text-xs mt-2">Pool does not have enough reserves.</span>
+                            </div>
+                        }
+                        {
+                            (loading === false && pairExists && nftsInPair?.length == 0) &&
+                            <div className="w-full h-full flex flex-col justify-center items-center">
+                                <FcCancel className="text-2xl" />
+                                <span className="text-xs mt-2">
+                                    NFT not existent in pool.
+                                </span>
                             </div>
                         }
                         {

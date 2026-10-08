@@ -58,7 +58,7 @@ export default function FaucetModal() {
     async function mintNFT(): Promise<boolean> {
         const chainName = getChainName(chainId)
         if (!chainName) return false
-        if (!selectedImg) return false
+        if (selectedImg === null) return false
         // @ts-ignore
         const nftAddress = collections.chains[chainName][selectedImg].address
         const abi = erc721

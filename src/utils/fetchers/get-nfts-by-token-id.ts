@@ -1,6 +1,7 @@
 import { SimpleHashNFTResponse } from "@/interfaces/simple-hash-nft-response";
 import { SupportedChains } from "@/types/supported-chains";
 import dotenv from "dotenv"
+import data from "../../../public/json/chain-data.json"
 
 dotenv.config()
 
@@ -9,24 +10,18 @@ export async function getNFTsById(
     chain: SupportedChains,
     ids: number[] | BigInt[]
 ): Promise<SimpleHashNFTResponse[] | undefined> {
-    const KEY = process.env.NEXT_PUBLIC_SIMPLE_HASH_API_KEY
-    if (!KEY) return undefined
-
-    const simpleHashChain = `eip155:${chain}`
+    const chainName = (data.supportedChains as any)[chain.toString()]
+    const alchemyAPIKey = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY
+    const alchemyUrl = `${(data.chains as any)[chainName].alchemyEndpoint}${alchemyAPIKey}`
 
     const promises: any = ids.map(async function (id: number | BigInt) {
         try {
-            const simpleHashRequest = await fetch(
-                `https://api.simplehash.com/api/v0/nfts/${simpleHashChain}/${address}/${id}`,
-                {
-                    method: "GET",
-                    headers: {
-                        "X-API-KEY": KEY,
-                        "Content-Type": "application/json"
-                    }
-                }
-            )
-            const { contract_address, token_id, name, image_url } = await simpleHashRequest.json()
+            const simpleHashRequest = await fetch(`${alchemyUrl}/getNFTMetadata?contractAddress=${address}&tokenId=${id}`)
+            const nft = await simpleHashRequest.json()
+            const contract_address = nft.contract.address
+            const token_id = Number(nft.id.tokenId).toString()
+            const name = nft.contractMetadata.name
+            const image_url = `https://gateway.pinata.cloud/${nft.metadata.image.slice(16)}`
             const data: SimpleHashNFTResponse = { contract_address, token_id, name, image_url }
             return data
         } catch { }

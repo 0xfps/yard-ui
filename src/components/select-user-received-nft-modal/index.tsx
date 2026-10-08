@@ -89,7 +89,6 @@ export default function SelectUserReceivedNFTModal() {
         const YardFactory = new ethers.Contract(factory, factoryAbi as any, provider)
         const pair = await YardFactory.getPair(ownerNFTAddress, address)
 
-        console.log({ ownerNFTAddress, address, pair, factory, router })
         if (pair == ethers.ZeroAddress) {
             setPairExists(false)
             setLoading(false)

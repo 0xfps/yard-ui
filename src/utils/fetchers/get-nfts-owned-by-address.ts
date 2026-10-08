@@ -1,6 +1,7 @@
 import { SimpleHashNFTResponse } from "@/interfaces/simple-hash-nft-response";
 import { SupportedChains } from "@/types/supported-chains";
 import dotenv from "dotenv"
+import data from "../../../public/json/chain-data.json"
 
 dotenv.config()
 
@@ -8,33 +9,36 @@ export async function getNFTsOwnedByAddress(
     address: string,
     chain: SupportedChains
 ): Promise<SimpleHashNFTResponse[] | undefined> {
-    const KEY = process.env.NEXT_PUBLIC_SIMPLE_HASH_API_KEY
-    if (!KEY) return undefined
+    const chainName = (data.supportedChains as any)[chain.toString()]
+    const alchemyAPIKey = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY
+    const alchemyUrl = `${(data.chains as any)[chainName].alchemyEndpoint}${alchemyAPIKey}`
 
-    const simpleHashChain = `eip155:${chain}`
     let simpleHashRequest: any
 
     try {
-        simpleHashRequest = await fetch(
-            `https://api.simplehash.com/api/v0/nfts/owners?chains=${simpleHashChain}&wallet_addresses=${address}&limit=50`,
-            {
-                method: "GET",
-                headers: {
-                    "X-API-KEY": KEY,
-                    "Content-Type": "application/json"
-                }
-            }
-        )
+        simpleHashRequest = await fetch(`${alchemyUrl}/getNFTsForOwner?owner=${address}&pageSize=5`)
     } catch { }
 
     if (!simpleHashRequest) return undefined
-    const { nfts } = await simpleHashRequest.json()
+    const { ownedNfts: nfts } = await simpleHashRequest.json()
 
     if (nfts.length == 0) return []
 
-    const usersNFTs: SimpleHashNFTResponse[] = nfts.map(function ({ contract_address, token_id, name, image_url }: SimpleHashNFTResponse) {
-        return { contract_address, token_id, name, image_url }
-    })
+    const usersNFTs = []
+
+    for (const nft of nfts) {
+        const contract_address = nft.contract.address
+        const token_id = Number(nft.id.tokenId).toString()
+        const name = nft.contractMetadata.name
+        const uri = `https://gateway.pinata.cloud/${nft.tokenUri.gateway.slice(16)}`
+
+        const metadataResponse = await fetch(uri);
+        const response = await metadataResponse.json();
+
+        const image_url = `/nfts/${response.id}.jpg`
+
+        usersNFTs.push({ contract_address, token_id, name, image_url })
+    }
 
     return usersNFTs
 }

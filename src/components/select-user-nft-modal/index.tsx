@@ -64,7 +64,6 @@ export default function SelectUserNFTModal() {
     }
 
     function setOwnerNFTData(data: SimpleHashNFTResponse) {
-        console.log({ data })
         setOwnerNFTAddress(data.contract_address)
         setOwnerNFTId(parseInt(data.token_id))
         setOwnerNFTImage(data.image_url)

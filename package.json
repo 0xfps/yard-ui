@@ -12,6 +12,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.4.6",
     "@tanstack/react-query": "^5.54.1",
+    "@tatumio/tatum": "^4.2.60",
     "@types/comma-number": "^2.1.2",
     "aos": "^2.3.4",
     "comma-number": "^2.1.0",

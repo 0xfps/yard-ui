@@ -10,6 +10,6 @@ export const wagmiConfig = createConfig({
         [baseSepolia.id]: http(),
         [bscTestnet.id]: http(),
         [scrollSepolia.id]: http(),
-        [sepolia.id]: http()
+        [sepolia.id]: http("https://ethereum-sepolia-rpc.publicnode.com")
     },
 })

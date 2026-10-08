@@ -49,7 +49,7 @@ export default function SelectUserReceivedNFTModal() {
         })
 
         setNfts(filteredCollections)
-    }, [])
+    }, [swapChainId])
 
     function sortNFTs(e: any) {
         if (ethers.isAddress(e.target.value)) {
@@ -71,10 +71,6 @@ export default function SelectUserReceivedNFTModal() {
     }
 
     async function loadData({ address }: CollectionInterface, index: number) {
-        if (!isArbitrarySwap) {
-            if (selectedIndex == index) return
-        }
-
         setLoading(true)
         setSelectedIndex(index)
         setNftsInPair([])
@@ -89,7 +85,6 @@ export default function SelectUserReceivedNFTModal() {
         const YardFactory = new ethers.Contract(factory, factoryAbi as any, provider)
         const pair = await YardFactory.getPair(ownerNFTAddress, address)
 
-        console.log({ ownerNFTAddress, address, pair, factory, router })
         if (pair == ethers.ZeroAddress) {
             setPairExists(false)
             setLoading(false)
